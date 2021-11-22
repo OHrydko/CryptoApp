@@ -24,7 +24,10 @@ android {
         }
         getByName(BuildTypes.RELEASE) {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -93,6 +96,8 @@ dependencies {
 
     implementation(project(Modules.DOMAIN_MODELS))
     implementation(project(Modules.USECASES))
+    implementation(project(Modules.RESOURCES))
+    implementation(project(Modules.BASE))
 
     testImplementation(Lib.TRUTH)
     // Required -- JUnit 4 framework

@@ -6,12 +6,12 @@ sealed class NetworkResponse<out T : Any, out U : Any> {
     /**
      * Success response with body
      */
-    data class Success<T : Any>(val body: T, val eTag: String) : NetworkResponse<T, Nothing>()
+    data class Success<T : Any>(val body: T) : NetworkResponse<T, Nothing>()
 
     /**
      * Failure response with body
      */
-    data class ApiError<U : Any>(val body: U, val code: Int, val eTag: String) :
+    data class ApiError<U : Any>(val body: U, val code: Int) :
         NetworkResponse<Nothing, U>()
 
     /**

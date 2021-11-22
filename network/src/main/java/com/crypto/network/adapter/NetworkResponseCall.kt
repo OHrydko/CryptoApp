@@ -24,16 +24,13 @@ internal class NetworkResponseCall<S : Any, E : Any>(
                 val code = response.code()
                 val error = response.errorBody()
 
-                val etag = response.headers()["etag"] ?: ""
-
                 if (response.isSuccessful) {
                     if (body != null) {
                         callback.onResponse(
                             this@NetworkResponseCall,
                             Response.success(
                                 NetworkResponse.Success(
-                                    body,
-                                    etag
+                                    body
                                 )
                             )
                         )

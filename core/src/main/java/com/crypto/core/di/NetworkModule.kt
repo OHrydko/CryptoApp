@@ -1,4 +1,4 @@
-package com.crypto.di
+package com.crypto.core.di
 
 import com.crypto.core.BuildConfig
 import com.crypto.network.adapter.NetworkResponseAdapterFactory
