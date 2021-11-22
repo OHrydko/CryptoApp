@@ -29,7 +29,7 @@ android {
             buildConfigField(
                     "String",
                     "API_ENDPOINT",
-                    "\"https://dev.nextadev.com/api/v1/\""
+                    "\"https://api.coingecko.com/api/\""
             )
 
 
@@ -41,7 +41,7 @@ android {
             buildConfigField(
                     "String",
                     "API_ENDPOINT",
-                    "\"https://dev.nextadev.com/api/v1/\""
+                    "\"https://api.coingecko.com/api/\""
             )
 
             isMinifyEnabled = false
