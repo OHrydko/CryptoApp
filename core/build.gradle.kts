@@ -145,6 +145,8 @@ dependencies {
     implementation(project(Modules.USECASES_IMPL))
 
     implementation(project(Modules.REPOSITORIES))
+    implementation(project(Modules.REPOSITORIES_IMPL))
+    implementation(project(Modules.DATASOURCES))
 
     implementation(project(Modules.APP))
 

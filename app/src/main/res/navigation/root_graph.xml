@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/coinFragment"
-        android:name="com.crypto.cryptoapp.feature_coin_details.CoinFragment"
+        android:name="com.crypto.cryptoapp.feature_list_coins.CoinFragment"
         android:label="CoinFragment" />
 </navigation>

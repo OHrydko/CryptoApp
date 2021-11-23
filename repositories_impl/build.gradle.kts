@@ -1,7 +1,6 @@
 plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
-    id(Plugins.KAPT)
 }
 
 android {
@@ -17,18 +16,13 @@ android {
 
     buildTypes {
         getByName(BuildTypes.DEBUG) {
-            buildConfigField("String", "AUTH_USERNAME", "\"serviceuser\"")
-            buildConfigField("String", "AUTH_PASSWORD", "\"Diaspora1!\"")
+
         }
         getByName(BuildTypes.RELEASE) {
-            buildConfigField("String", "AUTH_USERNAME", "\"serviceuser\"")
-            buildConfigField("String", "AUTH_PASSWORD", "\"Diaspora1!\"")
-
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,21 +37,14 @@ android {
 }
 
 dependencies {
-
     implementation(Lib.KOTLIN_STDLIB)
-
-    implementation(Lib.TIMBER)
-    implementation(Lib.THREETENABP)
+    implementation(Lib.KOTLINX_COROUTINES_ANDROID)
 
     implementation(Lib.HILT_ANDROID)
 
-    implementation(Lib.KOTLINX_COROUTINES_ANDROID)
-
-    implementation(Lib.RETROFIT)
-    implementation(Lib.RETROFIT_CONVERTER_GSON)
-    implementation(Lib.GSON)
-    implementation(Lib.OKHTTP3_LOGGING_INTERCEPTOR)
+    implementation(Lib.THREETENABP)
 
     implementation(project(Modules.DOMAIN_MODELS))
     implementation(project(Modules.DATASOURCES))
+    implementation(project(Modules.REPOSITORIES))
 }

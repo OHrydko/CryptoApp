@@ -94,6 +94,8 @@ dependencies {
 
     implementation(Lib.VIEWBINDING_PROPERTY_DELEGATE_NO_REFLECTION)
 
+    implementation(Lib.COIL)
+
     implementation(project(Modules.DOMAIN_MODELS))
     implementation(project(Modules.USECASES))
     implementation(project(Modules.RESOURCES))

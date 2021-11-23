@@ -12,3 +12,5 @@ include(
 rootProject.name = "CryptoApp"
 include ':base'
 include ':resources'
+include ':repositories_impl'
+include ':datasources'
