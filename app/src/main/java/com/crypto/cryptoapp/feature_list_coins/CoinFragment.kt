@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
 import com.crypto.base.AppTheme
+import com.crypto.base.ui.ScreenLoader
 import com.crypto.cryptoapp.R
 import com.crypto.domain_models.Coin
 import com.crypto.resources.SharedColors
@@ -51,7 +52,8 @@ class CoinFragment : Fragment() {
 @Composable
 private fun CoinsScreen(coinViewModel: CoinViewModel = viewModel()) {
 
-    val listCoins = coinViewModel.listCoins.collectAsState()
+    val listCoins = coinViewModel.listCoins.collectAsState(initial = listOf())
+    val isLoading = coinViewModel.loading.collectAsState()
 
     Column(
         modifier = Modifier
@@ -68,6 +70,10 @@ private fun CoinsScreen(coinViewModel: CoinViewModel = viewModel()) {
             itemsIndexed(listCoins.value) { _, item ->
                 ItemCrypto(coin = item)
             }
+        }
+
+        if (isLoading.value) {
+            ScreenLoader()
         }
     }
 }
