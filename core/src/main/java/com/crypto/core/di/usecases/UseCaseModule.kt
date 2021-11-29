@@ -1,6 +1,8 @@
 package com.crypto.core.di.usecases
 
+import com.crypto.usecases.GetCoinDetailsUseCase
 import com.crypto.usecases.GetListCoinsUseCase
+import com.crypto.usecases_impl.GetCoinDetailsUseCaseImpl
 import com.crypto.usecases_impl.GetListCoinsUseCaseImpl
 import dagger.Binds
 import dagger.Module
@@ -13,8 +15,13 @@ import dagger.hilt.components.SingletonComponent
 interface UseCaseModule {
 
     @Binds
-    fun bindIsEnableBiometricSettingsUseCase(
+    fun bindGetListCoinsUseCase(
         useCase: GetListCoinsUseCaseImpl
     ): GetListCoinsUseCase
+
+    @Binds
+    fun bindGetCoinDetailsUseCase(
+        useCase: GetCoinDetailsUseCaseImpl
+    ): GetCoinDetailsUseCase
 
 }

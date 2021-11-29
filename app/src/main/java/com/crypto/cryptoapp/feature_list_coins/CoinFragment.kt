@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.findNavController
 import coil.compose.rememberImagePainter
 import com.crypto.base.AppTheme
 import com.crypto.base.ui.ScreenLoader
@@ -43,14 +45,19 @@ class CoinFragment : Fragment() {
     ): View = ComposeView(requireContext()).apply {
         setContent {
             AppTheme {
-                CoinsScreen()
+                CoinsScreen {
+                    findNavController().navigate(
+                        R.id.coinDetailFragment,
+                        CoinFragmentArgs(it).toBundle()
+                    )
+                }
             }
         }
     }
 }
 
 @Composable
-private fun CoinsScreen(coinViewModel: CoinViewModel = viewModel()) {
+private fun CoinsScreen(coinViewModel: CoinViewModel = viewModel(), onCoinClick: (String) -> Unit) {
 
     val listCoins = coinViewModel.listCoins.collectAsState(initial = listOf())
     val isLoading = coinViewModel.loading.collectAsState()
@@ -68,7 +75,9 @@ private fun CoinsScreen(coinViewModel: CoinViewModel = viewModel()) {
                 Title()
             }
             itemsIndexed(listCoins.value) { _, item ->
-                ItemCrypto(coin = item)
+                ItemCrypto(coin = item) {
+                    onCoinClick.invoke(item.id)
+                }
             }
         }
 
@@ -79,11 +88,12 @@ private fun CoinsScreen(coinViewModel: CoinViewModel = viewModel()) {
 }
 
 @Composable
-private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin) {
+private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: () -> Unit) {
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
             .background(Color.White)
+            .clickable(onClick = onCoinClick)
     ) {
 
         val (rank, icon, name, symbol, price, divider) = createRefs()

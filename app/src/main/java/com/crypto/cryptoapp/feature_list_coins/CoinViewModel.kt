@@ -42,7 +42,6 @@ class CoinViewModel @Inject constructor(
             when (result) {
                 is DataResult.Success -> {
                     _listCoins.emit(result.data)
-                    Timber.d("TEST ${result.data[0].image}")
                 }
                 is DataResult.Failure -> {
                     Timber.d("Fail")
