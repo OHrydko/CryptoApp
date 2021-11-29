@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.findNavController
 import coil.compose.rememberImagePainter
@@ -37,6 +38,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CoinFragment : Fragment() {
+
+    private val viewModelCoinViewModel: CoinViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +56,11 @@ class CoinFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModelCoinViewModel.getListCoin()
     }
 }
 
