@@ -60,6 +60,11 @@ class CoinFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModelCoinViewModel.getListCoinFromDB()
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModelCoinViewModel.getListCoin()
     }
 }

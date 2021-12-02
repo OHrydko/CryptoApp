@@ -24,4 +24,8 @@ class CoinRepositoryImpl @Inject constructor(
     override suspend fun insertCoins(coins: List<Coin>): DataResult<Unit> {
         return localCoinDataSource.insertCoins(coins)
     }
+
+    override suspend fun getCoinsFromDB(): DataResult<List<Coin>> {
+        return localCoinDataSource.getCoinsFromDB()
+    }
 }

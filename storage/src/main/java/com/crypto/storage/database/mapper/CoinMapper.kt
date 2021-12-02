@@ -14,3 +14,15 @@ fun Coin.toEntity(): CoinEntity {
         marketCap = marketCap
     )
 }
+
+fun CoinEntity.toDomain(): Coin {
+    return Coin(
+        id = coinId,
+        name = coinName,
+        symbol = symbol,
+        image = image,
+        currentPrice = currentPrice,
+        marketCapRank = marketCapRank,
+        marketCap = marketCap
+    )
+}

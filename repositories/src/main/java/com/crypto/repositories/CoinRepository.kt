@@ -12,4 +12,6 @@ interface CoinRepository {
 
     suspend fun insertCoins(coins: List<Coin>): DataResult<Unit>
 
+    suspend fun getCoinsFromDB(): DataResult<List<Coin>>
+
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.crypto.domain_models.Coin
 import com.crypto.domain_models.DataResult
+import com.crypto.usecases.GetCoinsFromDBUseCase
 import com.crypto.usecases.GetListCoinsUseCase
 import com.crypto.usecases.InsertCoinsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CoinViewModel @Inject constructor(
     private val useCase: GetListCoinsUseCase,
-    private val insertCoinsUseCase: InsertCoinsUseCase
+    private val insertCoinsUseCase: InsertCoinsUseCase,
+    private val getCoinsFromDBUseCase: GetCoinsFromDBUseCase,
 ) : ViewModel() {
 
     private val _listCoins = MutableSharedFlow<List<Coin>>()
@@ -41,6 +43,27 @@ class CoinViewModel @Inject constructor(
                 is DataResult.Success -> {
                     _listCoins.emit(result.data)
                     saveToDB(result.data)
+                }
+                is DataResult.Failure -> {
+                    Timber.d("Fail")
+                }
+            }
+
+            _loading.value = false
+        }
+    }
+
+    fun getListCoinFromDB() {
+        viewModelScope.launch {
+
+            _loading.value = true
+
+            val result = withContext(Dispatchers.IO) {
+                getCoinsFromDBUseCase()
+            }
+            when (result) {
+                is DataResult.Success -> {
+                    _listCoins.emit(result.data)
                 }
                 is DataResult.Failure -> {
                     Timber.d("Fail")

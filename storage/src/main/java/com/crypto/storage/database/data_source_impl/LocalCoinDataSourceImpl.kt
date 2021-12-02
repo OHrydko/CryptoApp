@@ -4,6 +4,7 @@ import com.crypto.data_source.LocalCoinDataSource
 import com.crypto.domain_models.Coin
 import com.crypto.domain_models.DataResult
 import com.crypto.storage.database.dao.CoinDao
+import com.crypto.storage.database.mapper.toDomain
 import com.crypto.storage.database.mapper.toEntity
 import javax.inject.Inject
 
@@ -15,5 +16,8 @@ class LocalCoinDataSourceImpl @Inject constructor(private val coinDao: CoinDao) 
         return DataResult.Success(Unit)
     }
 
+    override suspend fun getCoinsFromDB(): DataResult<List<Coin>> {
+        return DataResult.Success(coinDao.getCoins().map { it.toDomain() })
+    }
 
 }
