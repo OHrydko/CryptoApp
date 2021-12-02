@@ -27,8 +27,6 @@ class CoinViewModel @Inject constructor(
     private val _loading = MutableStateFlow(false)
     val loading = _loading.asStateFlow()
 
-
-
     fun getListCoin() {
         viewModelScope.launch {
 

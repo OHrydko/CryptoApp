@@ -6,11 +6,23 @@ data class CoinDetails(
     val name: String,
     val description: Description,
     val image: CoinImage,
-    val marketData: MarketData,
-)
+    val marketData: MarketData
+) {
+    companion object {
+        val emptyState = CoinDetails(
+            id = "",
+            symbol = "",
+            name = "",
+            description = Description(en = ""),
+            image = CoinImage(thumb = "", small = "", large = ""),
+            marketData = MarketData(currentPrice = MarketCap(usd = ""), marketCapRank = "")
+        )
+    }
+}
+
 
 data class Description(
-    val en: String
+    var en: String
 )
 
 data class CoinImage(
