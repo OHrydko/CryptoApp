@@ -10,4 +10,6 @@ interface CoinRepository {
 
     suspend fun getDetails(id: String): DataResult<CoinDetails>
 
+    suspend fun insertCoins(coins: List<Coin>): DataResult<Unit>
+
 }

@@ -2,8 +2,10 @@ package com.crypto.core.di.usecases
 
 import com.crypto.usecases.GetCoinDetailsUseCase
 import com.crypto.usecases.GetListCoinsUseCase
+import com.crypto.usecases.InsertCoinsUseCase
 import com.crypto.usecases_impl.GetCoinDetailsUseCaseImpl
 import com.crypto.usecases_impl.GetListCoinsUseCaseImpl
+import com.crypto.usecases_impl.InsertCoinsUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -23,5 +25,10 @@ interface UseCaseModule {
     fun bindGetCoinDetailsUseCase(
         useCase: GetCoinDetailsUseCaseImpl
     ): GetCoinDetailsUseCase
+
+    @Binds
+    fun bindInsertCoinsUseCase(
+        useCase: InsertCoinsUseCaseImpl
+    ): InsertCoinsUseCase
 
 }
