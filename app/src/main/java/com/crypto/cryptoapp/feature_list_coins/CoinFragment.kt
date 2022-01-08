@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.findNavController
 import coil.compose.rememberImagePainter
 import com.crypto.base.AppTheme
@@ -48,7 +47,7 @@ class CoinFragment : Fragment() {
     ): View = ComposeView(requireContext()).apply {
         setContent {
             AppTheme {
-                CoinsScreen {
+                CoinsScreen(viewModelCoinViewModel) {
                     findNavController().navigate(
                         R.id.coinDetailFragment,
                         CoinFragmentArgs(it).toBundle()
@@ -70,7 +69,7 @@ class CoinFragment : Fragment() {
 }
 
 @Composable
-private fun CoinsScreen(coinViewModel: CoinViewModel = viewModel(), onCoinClick: (String) -> Unit) {
+private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> Unit) {
 
     val listCoins = coinViewModel.listCoins.collectAsState(initial = listOf())
     val isLoading = coinViewModel.loading.collectAsState()

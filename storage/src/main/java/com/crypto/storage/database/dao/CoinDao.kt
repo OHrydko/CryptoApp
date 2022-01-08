@@ -12,7 +12,7 @@ interface CoinDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCoins(cardInfo: List<CoinEntity>)
 
-    @Query("SELECT * from coin_entity")
+    @Query("SELECT * from coin_entity order by marketCapRank")
     fun getCoins(): List<CoinEntity>
 
 }
