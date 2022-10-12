@@ -9,9 +9,7 @@ import com.crypto.usecases.GetListCoinsUseCase
 import com.crypto.usecases.InsertCoinsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,13 +23,17 @@ class CoinViewModel @Inject constructor(
     private val getCoinsFromDBUseCase: GetCoinsFromDBUseCase,
 ) : ViewModel() {
 
-    private val _listCoins = MutableSharedFlow<List<Coin>>()
-    val listCoins = _listCoins.asSharedFlow()
+    private val _listCoins = MutableStateFlow<List<Coin>>(listOf())
+    val listCoins = _listCoins.asStateFlow()
 
     private val _loading = MutableStateFlow(false)
     val loading = _loading.asStateFlow()
 
-    fun getListCoin() {
+    init {
+        getListCoin()
+    }
+
+    private fun getListCoin() {
         viewModelScope.launch {
 
             _loading.value = true
@@ -41,7 +43,7 @@ class CoinViewModel @Inject constructor(
             }
             when (result) {
                 is DataResult.Success -> {
-                    _listCoins.emit(result.data)
+                    _listCoins.value = result.data
                     saveToDB(result.data)
                 }
                 is DataResult.Failure -> {
@@ -63,7 +65,7 @@ class CoinViewModel @Inject constructor(
             }
             when (result) {
                 is DataResult.Success -> {
-                    _listCoins.emit(result.data)
+                    _listCoins.value = result.data.sortedBy { it.marketCapRank.toInt() }
                 }
                 is DataResult.Failure -> {
                     Timber.d("Fail")
@@ -87,6 +89,7 @@ class CoinViewModel @Inject constructor(
                     Timber.d("insert coins")
                 }
                 is DataResult.Failure -> {
+                    Timber.d("Failure insert coins")
                 }
             }
         }

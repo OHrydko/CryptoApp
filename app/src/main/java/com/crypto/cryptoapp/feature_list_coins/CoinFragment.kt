@@ -62,17 +62,13 @@ class CoinFragment : Fragment() {
         viewModelCoinViewModel.getListCoinFromDB()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModelCoinViewModel.getListCoin()
-    }
 }
 
 @Composable
 private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> Unit) {
 
-    val listCoins = coinViewModel.listCoins.collectAsState(initial = listOf())
-    val isLoading = coinViewModel.loading.collectAsState()
+    val listCoins = coinViewModel.listCoins.collectAsState().value
+    val isLoading = coinViewModel.loading.collectAsState().value
 
     Column(
         modifier = Modifier
@@ -86,14 +82,17 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
             item {
                 Title()
             }
-            itemsIndexed(listCoins.value) { _, item ->
+            itemsIndexed(
+                key = { _: Int, item: Coin -> item.id },
+                items = listCoins
+            ) { _, item ->
                 ItemCrypto(coin = item) {
                     onCoinClick.invoke(item.id)
                 }
             }
         }
 
-        if (isLoading.value) {
+        if (isLoading) {
             ScreenLoader()
         }
     }
@@ -129,6 +128,9 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
             fontSize = SharedFontSize.Small,
         )
 
+//        builder = {
+//            placeholder(R.drawable.ic_launcher_background)
+//        }
         Image(
             painter = rememberImagePainter(coin.image),
             contentDescription = "icon",
