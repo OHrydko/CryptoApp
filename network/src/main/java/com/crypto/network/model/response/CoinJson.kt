@@ -14,7 +14,7 @@ data class CoinJson(
     @SerializedName("market_cap")
     val marketCap: String,
     @SerializedName("current_price")
-    val currentPrice: String,
+    val currentPrice: Double,
     @SerializedName("market_cap_rank")
     val marketCapRank: String,
 )

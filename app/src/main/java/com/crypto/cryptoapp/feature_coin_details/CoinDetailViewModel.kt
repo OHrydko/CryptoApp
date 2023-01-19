@@ -56,6 +56,7 @@ class CoinDetailViewModel @Inject constructor(
                 is DataResult.Failure -> {
                     Timber.d("Fail")
                 }
+                else -> {}
             }
 
             _loading.value = false

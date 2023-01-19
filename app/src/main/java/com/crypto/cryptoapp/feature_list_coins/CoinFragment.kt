@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,19 +13,24 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.crypto.base.AppTheme
 import com.crypto.base.ui.ScreenLoader
 import com.crypto.cryptoapp.R
@@ -100,98 +104,81 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
 
 @Composable
 private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: () -> Unit) {
-    ConstraintLayout(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(Color.White)
-            .clickable(onClick = onCoinClick)
-    ) {
+    Column {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(Color.White)
+                .clickable(onClick = onCoinClick),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
 
-        val (rank, icon, name, symbol, price, divider) = createRefs()
+            Text(
+                text = "${coin.marketCapRank}.",
+                modifier = Modifier
+                    .width(50.dp)
+                    .padding(start = 10.dp),
+                fontWeight = FontWeight.W500,
+                color = SharedColors.Grey700,
+                textAlign = TextAlign.Center,
+                fontSize = SharedFontSize.Small,
+            )
 
-        Text(
-            text = "${coin.marketCapRank}.",
-            modifier = Modifier
-                .width(40.dp)
-                .constrainAs(rank) {
-                    linkTo(
-                        top = parent.top,
-                        bottom = parent.bottom,
-                        start = parent.start,
-                        end = icon.start,
-                    )
-                }
-                .padding(start = 10.dp),
-            fontWeight = FontWeight.W500,
-            color = SharedColors.Grey700,
-            textAlign = TextAlign.Center,
-            fontSize = SharedFontSize.Small,
-        )
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(coin.image)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = "icon",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .padding(vertical = 10.dp)
+                    .size(40.dp)
+            )
 
-//        builder = {
-//            placeholder(R.drawable.ic_launcher_background)
-//        }
-        Image(
-            painter = rememberImagePainter(coin.image),
-            contentDescription = "icon",
-            modifier = Modifier
-                .padding(vertical = 10.dp)
-                .constrainAs(icon) {
-                    start.linkTo(rank.end, margin = 4.dp)
-                    centerVerticallyTo(parent)
-                }
-                .size(40.dp)
-        )
+            Column(
+                modifier = Modifier
+                    .padding(start = 10.dp)
+                    .weight(1f)
+            ) {
 
-        Text(
-            text = coin.name, modifier = Modifier.constrainAs(name) {
-                start.linkTo(icon.end, margin = 10.dp)
-                top.linkTo(parent.top, margin = 10.dp)
-            },
-            fontWeight = FontWeight.W500,
-            color = SharedColors.Grey700,
-            fontSize = SharedFontSize.Medium
-        )
-
-        Text(
-            text = coin.symbol.uppercase(), modifier = Modifier.constrainAs(symbol) {
-                linkTo(
-                    top = name.bottom,
-                    bottom = divider.top,
-                    start = name.start,
-                    end = parent.end,
-                    horizontalBias = 0F,
-                    verticalBias = 0F,
-                    topMargin = 2.dp,
-                    bottomMargin = 10.dp,
+                Text(
+                    text = coin.name,
+                    fontWeight = FontWeight.W500,
+                    color = SharedColors.Grey700,
+                    fontSize = SharedFontSize.Medium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
-            },
-            fontWeight = FontWeight.W500,
-            color = SharedColors.Grey400,
-            fontSize = SharedFontSize.Small
-        )
 
-        Text(
-            text = "$${coin.currentPrice}",
-            modifier = Modifier
-                .constrainAs(price) {
-                    end.linkTo(parent.end)
-                    centerVerticallyTo(parent)
-                }
-                .padding(end = 10.dp),
-            fontWeight = FontWeight.W500,
-            color = SharedColors.Grey700,
-            fontSize = SharedFontSize.Medium
-        )
+                Text(
+                    text = coin.symbol.uppercase(),
+                    fontWeight = FontWeight.W500,
+                    color = SharedColors.Grey400,
+                    fontSize = SharedFontSize.Small
+                )
+            }
 
+            val price = if (coin.currentPrice > 1) {
+                "$${coin.currentPrice}"
+            } else {
+                "$${String.format("%.3f", coin.currentPrice)}"
+            }
+
+            Text(
+                text = price,
+                modifier = Modifier
+                    .padding(end = 10.dp),
+                fontWeight = FontWeight.W500,
+                color = SharedColors.Grey700,
+                fontSize = SharedFontSize.Medium
+            )
+        }
         Divider(
             color = SharedColors.Grey200,
             thickness = 1.dp,
             modifier = Modifier
                 .fillMaxWidth()
-                .constrainAs(divider) {
-                    bottom.linkTo(parent.bottom)
-                }
         )
     }
 }

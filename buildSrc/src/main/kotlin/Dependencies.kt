@@ -1,11 +1,11 @@
 object Version {
     const val MIN_SDK = 23
-    const val TARGET_SDK = 30
-    const val COMPILE_SDK = 30
+    const val TARGET_SDK = 32
+    const val COMPILE_SDK = 32
 
     const val BUILD_TOOLS = "30.0.3"
 
-    const val KOTLIN = "1.5.21"
+    const val KOTLIN = "1.7.0"
 
     const val KOTLIN_STDLIB = "1.5.0"
 
@@ -19,16 +19,16 @@ object Version {
     const val RETROFIT2 = "2.9.0"
     const val GSON = "2.8.7"
     const val KTX = "1.6.0"
-    const val ACTIVITY_KTX = "1.3.1"
+    const val ACTIVITY_KTX = "1.5.1"
     const val FRAGMENT_KTX = "1.3.6"
     const val CONSTRAINT = "2.0.4"
     const val MATERIAL = "1.4.0"
     const val TIMBER = "4.7.1"
-    const val NAVIGATION = "2.3.5"
-    const val ROOM = "2.3.0"
+    const val NAVIGATION = "2.5.1"
+    const val ROOM = "2.4.3"
 
-    const val COMPOSE = "1.0.2"
-    const val COIL = "1.3.0"
+    const val COMPOSE = "1.2.0"
+    const val COIL = "2.2.2"
 }
 
 object Lib {
@@ -84,7 +84,7 @@ object Lib {
 
     // Integration with ViewModels
     const val COMPOSE_LIFECYCLE_VIEWMODEL =
-        "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
+        "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0"
 
     const val COIL =
         "io.coil-kt:coil-compose:${Version.COIL}"

@@ -10,7 +10,7 @@ class CoinEntity(
     val coinName: String,
     val symbol: String,
     val image: String,
-    val currentPrice: String,
+    val currentPrice: Double,
     val marketCapRank: String,
     val marketCap: String
 )
