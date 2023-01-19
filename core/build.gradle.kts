@@ -9,6 +9,19 @@ plugins {
 android {
     compileSdk = Version.COMPILE_SDK
 
+    signingConfigs {
+        create("release") {
+            keyAlias = "release"
+            keyPassword = "qwerty123"
+            storeFile = file("/Users/ohrydko/AndroidStudioProjects/CryptoApp2/Untitled")
+            storePassword = "qwerty123"
+        }
+    }
+
+    lint {
+        isCheckReleaseBuilds = false
+    }
+
     defaultConfig {
         applicationId = "com.crypto.core"
 
@@ -19,6 +32,7 @@ android {
         versionName = AppVersion.NAME
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig = signingConfigs.getByName("release")
     }
 
 

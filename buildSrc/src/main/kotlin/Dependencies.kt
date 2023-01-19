@@ -7,7 +7,7 @@ object Version {
 
     const val KOTLIN = "1.7.0"
 
-    const val KOTLIN_STDLIB = "1.5.0"
+    const val KOTLIN_STDLIB = "1.7.0"
 
     const val COROUTINES = "1.5.0"
     const val ANDROIDX = "1.3.0"
