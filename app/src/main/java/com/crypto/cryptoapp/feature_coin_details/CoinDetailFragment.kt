@@ -13,7 +13,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.W400
 import androidx.compose.ui.text.font.FontWeight.Companion.W600
@@ -24,7 +26,9 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.findNavController
+import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.crypto.base.AppTheme
 import com.crypto.base.ui.AppToolbar
 import com.crypto.base.ui.ScreenLoader
@@ -105,9 +109,13 @@ private fun Content(coinDetails: CoinDetails) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = rememberImagePainter(coinDetails.image.large),
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(coinDetails.image.large)
+                    .crossfade(true)
+                    .build(),
                 contentDescription = "icon",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(120.dp)
             )
