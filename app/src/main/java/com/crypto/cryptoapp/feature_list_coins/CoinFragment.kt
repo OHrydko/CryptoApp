@@ -8,7 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -81,17 +80,12 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
     ) {
 
         ToolbarApp()
+        Title()
 
         LazyColumn(modifier = Modifier.padding(bottom = 20.dp)) {
-            item {
-                Title()
-            }
-            itemsIndexed(
-                key = { _: Int, item: Coin -> item.id },
-                items = listCoins
-            ) { _, item ->
-                ItemCrypto(coin = item) {
-                    onCoinClick.invoke(item.id)
+            items(listCoins, key = { it.id }) { coin ->
+                ItemCrypto(coin = coin) {
+                    onCoinClick.invoke(coin.id)
                 }
             }
         }
