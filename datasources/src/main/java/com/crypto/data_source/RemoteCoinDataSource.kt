@@ -7,6 +7,7 @@ import com.crypto.domain_models.DataResult
 import kotlinx.coroutines.flow.Flow
 
 interface RemoteCoinDataSource {
+
     fun getCoins(): Flow<PagingData<Coin>>
 
     suspend fun getDetails(id: String): DataResult<CoinDetails>

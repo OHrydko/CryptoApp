@@ -3,6 +3,7 @@ package com.crypto.network.data_sources_impl
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.crypto.data_source.LocalCoinDataSource
 import com.crypto.data_source.RemoteCoinDataSource
 import com.crypto.domain_models.Coin
 import com.crypto.domain_models.CoinDetails
@@ -15,15 +16,16 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CoinDataSourcesImpl @Inject constructor(
-    private val coinService: CoinService
+    private val coinService: CoinService,
+    private val coinDataSource: LocalCoinDataSource
 ) : RemoteCoinDataSource {
     override fun getCoins(): Flow<PagingData<Coin>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 20,
+                pageSize = 50,
             ),
             pagingSourceFactory = {
-                CoinsPagingSource(coinService)
+                CoinsPagingSource(coinService, coinDataSource)
             }
         ).flow
     }

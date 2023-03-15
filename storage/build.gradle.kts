@@ -52,6 +52,8 @@ dependencies {
 
     implementation(Lib.ROOM_RUNTIME)
     implementation(Lib.ROOM_KTX)
+    implementation(Lib.PAGING_RUNTIME)
+    implementation(Lib.PAGING_ROOM)
     implementation(Lib.GSON)
     kapt(Lib.ROOM_COMPILER)
 

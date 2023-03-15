@@ -104,4 +104,5 @@ object Lib {
 
     const val PAGING_RUNTIME = "androidx.paging:paging-runtime:${Version.PAGING_RUNTIME}"
     const val PAGING_COMPOSE =  "androidx.paging:paging-compose:1.0.0-alpha17"
+    const val PAGING_ROOM =  "androidx.room:room-paging:${Version.ROOM}"
 }

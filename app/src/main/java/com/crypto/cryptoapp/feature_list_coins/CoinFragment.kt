@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -64,17 +63,10 @@ class CoinFragment : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModelCoinViewModel.getListCoinFromDB()
-    }
-
 }
 
 @Composable
 private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> Unit) {
-
-    val isLoading = coinViewModel.loading.collectAsState().value
 
     val coins = coinViewModel.getCoins().collectAsLazyPagingItems()
 
@@ -86,10 +78,10 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
 
         ToolbarApp()
 
+        Title()
+
         LazyColumn(modifier = Modifier.padding(bottom = 20.dp)) {
-            item {
-                Title()
-            }
+
             items(
                 items = coins,
                 key = {
@@ -100,6 +92,7 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
                     onCoinClick.invoke(item?.id ?: "")
                 }
             }
+
             when (val state = coins.loadState.refresh) {
                 is LoadState.Error -> {
                     item {
@@ -121,6 +114,7 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
                 }
                 else -> {}
             }
+
             when (val state = coins.loadState.append) {
                 is LoadState.Error -> {
                     item {
@@ -141,10 +135,6 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
                 }
                 else -> {}
             }
-        }
-
-        if (isLoading) {
-            ScreenLoader()
         }
     }
 }

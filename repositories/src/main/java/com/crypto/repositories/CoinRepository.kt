@@ -10,6 +10,8 @@ interface CoinRepository {
 
     fun getCoins(): Flow<PagingData<Coin>>
 
+    fun getPagedCoinsFromDB(): Flow<PagingData<Coin>>
+
     suspend fun getDetails(id: String): DataResult<CoinDetails>
 
     suspend fun insertCoins(coins: List<Coin>): DataResult<Unit>

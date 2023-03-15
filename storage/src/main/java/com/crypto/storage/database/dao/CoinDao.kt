@@ -1,5 +1,6 @@
 package com.crypto.storage.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -14,5 +15,8 @@ interface CoinDao {
 
     @Query("SELECT * from coin_entity order by marketCapRank")
     fun getCoins(): List<CoinEntity>
+
+    @Query("SELECT * from coin_entity order by marketCapRank")
+    fun getPagedCoins(): PagingSource<Int, CoinEntity>
 
 }

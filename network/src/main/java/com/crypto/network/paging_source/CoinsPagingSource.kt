@@ -2,13 +2,15 @@ package com.crypto.network.paging_source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.crypto.data_source.LocalCoinDataSource
 import com.crypto.domain_models.Coin
 import com.crypto.network.mapper.toDomain
 import com.crypto.network.model.NetworkResponse
 import com.crypto.network.service.CoinService
 
 class CoinsPagingSource(
-    private val service: CoinService
+    private val service: CoinService,
+    private val coinDataSource: LocalCoinDataSource
 ) : PagingSource<Int, Coin>() {
 
 
@@ -33,6 +35,9 @@ class CoinsPagingSource(
                             LoadResult.Error(RuntimeException(it.error))
                         }
                         is NetworkResponse.Success -> {
+
+                            coinDataSource.insertCoins(it.body.map { item -> item.toDomain() })
+
                             LoadResult.Page(
                                 data = it.body.map { item -> item.toDomain() },
                                 prevKey = if (page == 1) null else page.minus(1),
