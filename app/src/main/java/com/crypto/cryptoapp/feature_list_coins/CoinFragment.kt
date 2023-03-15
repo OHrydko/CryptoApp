@@ -8,7 +8,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -29,6 +27,9 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.paging.LoadState
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.crypto.base.AppTheme
@@ -52,10 +53,12 @@ class CoinFragment : Fragment() {
         setContent {
             AppTheme {
                 CoinsScreen(viewModelCoinViewModel) {
-                    findNavController().navigate(
-                        R.id.coinDetailFragment,
-                        CoinFragmentArgs(it).toBundle()
-                    )
+                    if (it.isNotEmpty()) {
+                        findNavController().navigate(
+                            R.id.coinDetailFragment,
+                            CoinFragmentArgs(it).toBundle()
+                        )
+                    }
                 }
             }
         }
@@ -71,8 +74,9 @@ class CoinFragment : Fragment() {
 @Composable
 private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> Unit) {
 
-    val listCoins = coinViewModel.listCoins.collectAsState().value
     val isLoading = coinViewModel.loading.collectAsState().value
+
+    val coins = coinViewModel.getCoins().collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier
@@ -86,13 +90,56 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
             item {
                 Title()
             }
-            itemsIndexed(
-                key = { _: Int, item: Coin -> item.id },
-                items = listCoins
-            ) { _, item ->
-                ItemCrypto(coin = item) {
-                    onCoinClick.invoke(item.id)
+            items(
+                items = coins,
+                key = {
+                    it.id
                 }
+            ) { item ->
+                ItemCrypto(coin = item ?: Coin.default) {
+                    onCoinClick.invoke(item?.id ?: "")
+                }
+            }
+            when (val state = coins.loadState.refresh) {
+                is LoadState.Error -> {
+                    item {
+                        Text(text = state.error.toString())
+                    }
+                }
+                is LoadState.Loading -> {
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillParentMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                        ) {
+
+                            ScreenLoader()
+                        }
+                    }
+                }
+                else -> {}
+            }
+            when (val state = coins.loadState.append) {
+                is LoadState.Error -> {
+                    item {
+                        Text(text = state.error.toString())
+                    }
+                }
+                is LoadState.Loading -> {
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                        ) {
+                            ScreenLoader()
+                        }
+                    }
+                }
+                else -> {}
             }
         }
 

@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation(Lib.KOTLIN_STDLIB)
     implementation(Lib.KOTLINX_COROUTINES_ANDROID)
+    implementation(Lib.PAGING_RUNTIME)
 
     implementation(project(Modules.DOMAIN_MODELS))
 

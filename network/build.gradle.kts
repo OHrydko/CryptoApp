@@ -57,6 +57,7 @@ dependencies {
     implementation(Lib.RETROFIT_CONVERTER_GSON)
     implementation(Lib.GSON)
     implementation(Lib.OKHTTP3_LOGGING_INTERCEPTOR)
+    implementation(Lib.PAGING_RUNTIME)
 
     implementation(project(Modules.DOMAIN_MODELS))
     implementation(project(Modules.DATASOURCES))

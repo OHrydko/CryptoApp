@@ -1,8 +1,9 @@
 package com.crypto.usecases
 
+import androidx.paging.PagingData
 import com.crypto.domain_models.Coin
-import com.crypto.domain_models.DataResult
+import kotlinx.coroutines.flow.Flow
 
 interface GetListCoinsUseCase {
-    suspend operator fun invoke(): DataResult<List<Coin>>
+    operator fun invoke(): Flow<PagingData<Coin>>
 }

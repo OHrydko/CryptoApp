@@ -8,4 +8,16 @@ data class Coin(
     val currentPrice: Double,
     val marketCapRank: String,
     val marketCap: String
-)
+) {
+    companion object {
+        val default = Coin(
+            id = "-1",
+            name = "",
+            symbol = "",
+            image = "",
+            currentPrice = 0.0,
+            marketCap = "",
+            marketCapRank = ""
+        )
+    }
+}

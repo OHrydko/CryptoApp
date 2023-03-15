@@ -143,6 +143,7 @@ dependencies {
     implementation(Lib.RETROFIT_CONVERTER_GSON)
     implementation(Lib.GSON)
     implementation(Lib.OKHTTP3_LOGGING_INTERCEPTOR)
+    implementation(Lib.PAGING_RUNTIME)
 
     implementation(Lib.TIMBER)
     implementation(Lib.THREETENABP)

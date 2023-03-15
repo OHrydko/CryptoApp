@@ -1,7 +1,7 @@
 object Version {
     const val MIN_SDK = 23
-    const val TARGET_SDK = 32
-    const val COMPILE_SDK = 32
+    const val TARGET_SDK = 33
+    const val COMPILE_SDK = 33
 
     const val BUILD_TOOLS = "30.0.3"
 
@@ -29,6 +29,7 @@ object Version {
 
     const val COMPOSE = "1.2.0"
     const val COIL = "2.2.2"
+    const val PAGING_RUNTIME = "3.1.1"
 }
 
 object Lib {
@@ -101,4 +102,6 @@ object Lib {
     const val MOCKITO_CORE = "org.mockito:mockito-core:2.21.0"
     const val MOCKITO_INLINE = "org.mockito:mockito-inline:2.13.0"
 
+    const val PAGING_RUNTIME = "androidx.paging:paging-runtime:${Version.PAGING_RUNTIME}"
+    const val PAGING_COMPOSE =  "androidx.paging:paging-compose:1.0.0-alpha17"
 }

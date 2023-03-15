@@ -95,6 +95,8 @@ dependencies {
     implementation(Lib.VIEWBINDING_PROPERTY_DELEGATE_NO_REFLECTION)
 
     implementation(Lib.COIL)
+    implementation(Lib.PAGING_COMPOSE)
+    implementation(Lib.PAGING_RUNTIME)
 
     implementation(project(Modules.DOMAIN_MODELS))
     implementation(project(Modules.USECASES))

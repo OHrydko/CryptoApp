@@ -2,6 +2,8 @@ package com.crypto.cryptoapp.feature_list_coins
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.crypto.domain_models.Coin
 import com.crypto.domain_models.DataResult
 import com.crypto.usecases.GetCoinsFromDBUseCase
@@ -9,8 +11,10 @@ import com.crypto.usecases.GetListCoinsUseCase
 import com.crypto.usecases.InsertCoinsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -30,30 +34,32 @@ class CoinViewModel @Inject constructor(
     val loading = _loading.asStateFlow()
 
     init {
-        getListCoin()
+//        getListCoin()
     }
 
-    private fun getListCoin() {
-        viewModelScope.launch {
+    fun getCoins(): Flow<PagingData<Coin>> = useCase().cachedIn(viewModelScope)
 
-            _loading.value = true
-
-            val result = withContext(Dispatchers.IO) {
-                useCase()
-            }
-            when (result) {
-                is DataResult.Success -> {
-                    _listCoins.value = result.data
-                    saveToDB(result.data)
-                }
-                is DataResult.Failure -> {
-                    Timber.d("Fail")
-                }
-            }
-
-            _loading.value = false
-        }
-    }
+//    private fun getListCoin() {
+//        viewModelScope.launch {
+//
+//            _loading.value = true
+//
+//            val result = withContext(Dispatchers.IO) {
+//                useCase()
+//            }
+//            when (result) {
+//                is DataResult.Success -> {
+//                    _listCoins.value = result.data
+//                    saveToDB(result.data)
+//                }
+//                is DataResult.Failure -> {
+//                    Timber.d("Fail")
+//                }
+//            }
+//
+//            _loading.value = false
+//        }
+//    }
 
     fun getListCoinFromDB() {
         viewModelScope.launch {

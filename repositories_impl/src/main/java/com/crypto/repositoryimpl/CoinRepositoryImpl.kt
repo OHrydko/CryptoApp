@@ -1,11 +1,13 @@
 package com.crypto.repositoryimpl
 
+import androidx.paging.PagingData
 import com.crypto.data_source.LocalCoinDataSource
 import com.crypto.data_source.RemoteCoinDataSource
 import com.crypto.domain_models.Coin
 import com.crypto.domain_models.CoinDetails
 import com.crypto.domain_models.DataResult
 import com.crypto.repositories.CoinRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CoinRepositoryImpl @Inject constructor(
@@ -13,7 +15,7 @@ class CoinRepositoryImpl @Inject constructor(
     private val localCoinDataSource: LocalCoinDataSource
 ) : CoinRepository {
 
-    override suspend fun getCoins(): DataResult<List<Coin>> {
+    override fun getCoins(): Flow<PagingData<Coin>> {
         return remoteCoinDataSource.getCoins()
     }
 
