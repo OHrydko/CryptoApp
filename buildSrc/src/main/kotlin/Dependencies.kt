@@ -31,6 +31,8 @@ object Version {
     const val COMPOSE_UI_TOOLING = "1.3.3"
     const val COMPOSE_COMPILER = "1.4.3"
     const val COIL = "2.2.2"
+    const val BENCHMARK = "1.1.1"
+    const val PROFILE_INSTALLER = "1.2.2"
 }
 
 object Lib {
@@ -102,5 +104,7 @@ object Lib {
     const val TEST_CORE = "androidx.test:core:1.3.0"
     const val MOCKITO_CORE = "org.mockito:mockito-core:2.21.0"
     const val MOCKITO_INLINE = "org.mockito:mockito-inline:2.13.0"
+    const val BENCHMARK = "androidx.benchmark:benchmark-macro-junit4:${Version.BENCHMARK}"
+    const val PROFILE_INSTALLER = "androidx.profileinstaller:profileinstaller:${Version.PROFILE_INSTALLER}"
 
 }

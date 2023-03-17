@@ -60,6 +60,16 @@ android {
                     "proguard-rules.pro"
             )
         }
+        create("benchmark") {
+            signingConfig = signingConfigs.getByName("debug")
+            buildConfigField(
+                "String",
+                "API_ENDPOINT",
+                "\"https://api.coingecko.com/api/\""
+            )
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
     }
 
     applicationVariants.forEach { variant ->
@@ -142,6 +152,7 @@ dependencies {
 
     implementation(Lib.TIMBER)
     implementation(Lib.THREETENABP)
+    implementation(Lib.PROFILE_INSTALLER)
 
     implementation(Lib.ROOM_RUNTIME)
     implementation(Lib.ROOM_KTX)
