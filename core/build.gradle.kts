@@ -18,10 +18,6 @@ android {
         }
     }
 
-    lint {
-        isCheckReleaseBuilds = false
-    }
-
     defaultConfig {
         applicationId = "com.crypto.core"
 

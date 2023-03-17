@@ -1,13 +1,11 @@
 object Version {
     const val MIN_SDK = 23
-    const val TARGET_SDK = 32
-    const val COMPILE_SDK = 32
+    const val TARGET_SDK = 33
+    const val COMPILE_SDK = 33
 
     const val BUILD_TOOLS = "30.0.3"
 
-    const val KOTLIN = "1.7.0"
-
-    const val KOTLIN_STDLIB = "1.7.0"
+    const val KOTLIN = "1.8.10"
 
     const val COROUTINES = "1.5.0"
     const val ANDROIDX = "1.3.0"
@@ -27,7 +25,11 @@ object Version {
     const val NAVIGATION = "2.5.1"
     const val ROOM = "2.4.3"
 
-    const val COMPOSE = "1.2.0"
+    const val COMPOSE = "1.3.3"
+    const val COMPOSE_MATERIAL = "1.3.1"
+    const val COMPOSE_ANIMATION = "1.3.3"
+    const val COMPOSE_UI_TOOLING = "1.3.3"
+    const val COMPOSE_COMPILER = "1.4.3"
     const val COIL = "2.2.2"
 }
 
@@ -74,13 +76,13 @@ object Lib {
     const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:${Version.ACTIVITY_KTX}"
 
     // Compose Material Design
-    const val COMPOSE_MATERIAL = "androidx.compose.material:material:${Version.COMPOSE}"
+    const val COMPOSE_MATERIAL = "androidx.compose.material:material:${Version.COMPOSE_MATERIAL}"
 
     // Animations
-    const val COMPOSE_ANIMATION = "androidx.compose.animation:animation:${Version.COMPOSE}"
+    const val COMPOSE_ANIMATION = "androidx.compose.animation:animation:${Version.COMPOSE_ANIMATION}"
 
     // Tooling support (Previews, etc.)
-    const val COMPOSE_UI_TOOLING = "androidx.compose.ui:ui-tooling:${Version.COMPOSE}"
+    const val COMPOSE_UI_TOOLING = "androidx.compose.ui:ui-tooling:${Version.COMPOSE_UI_TOOLING}"
 
     // Integration with ViewModels
     const val COMPOSE_LIFECYCLE_VIEWMODEL =
