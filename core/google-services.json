@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "599800320138",
+    "project_id": "cryptotest-fdbf7",
+    "storage_bucket": "cryptotest-fdbf7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599800320138:android:4570632c563d1523ea9d73",
+        "android_client_info": {
+          "package_name": "com.crypto.core"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599800320138-vvjnj107tqb7pr8mhovn0hkmvt3o8mse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgt4Hhz-0qgLfBiQBNwaMn_JXQcgxqLas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599800320138-vvjnj107tqb7pr8mhovn0hkmvt3o8mse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599800320138:android:fafd20f93b002378ea9d73",
+        "android_client_info": {
+          "package_name": "com.crypto.core.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599800320138-vvjnj107tqb7pr8mhovn0hkmvt3o8mse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgt4Hhz-0qgLfBiQBNwaMn_JXQcgxqLas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599800320138-vvjnj107tqb7pr8mhovn0hkmvt3o8mse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

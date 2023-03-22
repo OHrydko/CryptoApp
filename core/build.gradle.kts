@@ -4,6 +4,7 @@ plugins {
     id(Plugins.NAVIGATION)
     id(Plugins.KAPT)
     id(Plugins.HILT)
+    id(Plugins.GOOGLE_SERVICES)
 }
 
 android {
@@ -37,9 +38,9 @@ android {
             applicationIdSuffix = ".debug"
 
             buildConfigField(
-                    "String",
-                    "API_ENDPOINT",
-                    "\"https://api.coingecko.com/api/\""
+                "String",
+                "API_ENDPOINT",
+                "\"https://api.coingecko.com/api/\""
             )
 
 
@@ -49,15 +50,15 @@ android {
 //            signingConfig = signingConfigs.getByName(BuildTypes.RELEASE)
 
             buildConfigField(
-                    "String",
-                    "API_ENDPOINT",
-                    "\"https://api.coingecko.com/api/\""
+                "String",
+                "API_ENDPOINT",
+                "\"https://api.coingecko.com/api/\""
             )
 
             isMinifyEnabled = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
@@ -67,7 +68,7 @@ android {
             output as com.android.build.gradle.internal.api.BaseVariantOutputImpl
 //            if (output as com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
             val name =
-                    "crypto(${AppVersion.NAME}:${AppVersion.NUMBER})-${variant.buildType.name}.apk"
+                "crypto(${AppVersion.NAME}:${AppVersion.NUMBER})-${variant.buildType.name}.apk"
             output.outputFileName = name
 //            }
         }
@@ -80,7 +81,7 @@ android {
                 output as com.android.build.gradle.internal.api.BaseVariantOutputImpl
 //            if (output as com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
                 val name =
-                        "crypto(${AppVersion.NAME}-${AppVersion.NUMBER})-${variant.buildType.name}.apk"
+                    "crypto(${AppVersion.NAME}-${AppVersion.NUMBER})-${variant.buildType.name}.apk"
                 output.outputFileName = name
 //            }
             }
@@ -146,6 +147,8 @@ dependencies {
     implementation(Lib.ROOM_RUNTIME)
     implementation(Lib.ROOM_KTX)
     kapt(Lib.ROOM_COMPILER)
+
+    implementation(Lib.FIREBASE)
 
     implementation(project(Modules.DOMAIN_MODELS))
 

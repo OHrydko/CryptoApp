@@ -31,6 +31,7 @@ object Version {
     const val COMPOSE_UI_TOOLING = "1.3.3"
     const val COMPOSE_COMPILER = "1.4.3"
     const val COIL = "2.2.2"
+    const val FIREBASE = "23.0.3"
 }
 
 object Lib {
@@ -79,7 +80,8 @@ object Lib {
     const val COMPOSE_MATERIAL = "androidx.compose.material:material:${Version.COMPOSE_MATERIAL}"
 
     // Animations
-    const val COMPOSE_ANIMATION = "androidx.compose.animation:animation:${Version.COMPOSE_ANIMATION}"
+    const val COMPOSE_ANIMATION =
+        "androidx.compose.animation:animation:${Version.COMPOSE_ANIMATION}"
 
     // Tooling support (Previews, etc.)
     const val COMPOSE_UI_TOOLING = "androidx.compose.ui:ui-tooling:${Version.COMPOSE_UI_TOOLING}"
@@ -102,5 +104,7 @@ object Lib {
     const val TEST_CORE = "androidx.test:core:1.3.0"
     const val MOCKITO_CORE = "org.mockito:mockito-core:2.21.0"
     const val MOCKITO_INLINE = "org.mockito:mockito-inline:2.13.0"
+
+    const val FIREBASE = "com.google.firebase:firebase-messaging:${Version.FIREBASE}"
 
 }
