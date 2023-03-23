@@ -24,8 +24,22 @@ class MyFirebaseService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
-        Log.d(TAG, "Firebase token: ${message.notification?.title}")
+        Log.d(TAG, "Firebase message title: ${message.notification?.title}")
 
+        message.notification?.let {
+            if (message.data.isNotEmpty()) {
+                Log.d(TAG, "Firebase data: ${message.data}")
+                createNotification(it, message.data)
+            } else {
+                createNotification(it)
+            }
+        }
+    }
+
+    private fun createNotification(
+        notification: RemoteMessage.Notification?,
+        data: Map<String, String>? = null
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME)
         }
@@ -34,14 +48,19 @@ class MyFirebaseService : FirebaseMessagingService() {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        if (data != null) {
+            intent.putExtra(COIN_ID, data[COIN_ID])
+        }
+
+        val pendingIntent: PendingIntent =
+            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         val builder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher_round)
-            .setContentTitle(message.notification?.title)
-            .setContentText(message.notification?.body)
+            .setContentTitle(notification?.title)
+            .setContentText(notification?.body)
             .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         with(NotificationManagerCompat.from(this)) {
             // notificationId is a unique int for each notification that you must define
@@ -71,5 +90,6 @@ class MyFirebaseService : FirebaseMessagingService() {
         private const val NOTIFICATION_CHANNEL_ID = "1"
         private const val NOTIFICATION_CHANNEL_NAME = "Notification Channel"
         private const val NOTIFICATION_ID = 1
+        const val COIN_ID = "coin_id"
     }
 }
