@@ -149,6 +149,7 @@ dependencies {
     kapt(Lib.ROOM_COMPILER)
 
     implementation(Lib.FIREBASE)
+    implementation(Lib.WORK_MANAGER)
 
     implementation(project(Modules.DOMAIN_MODELS))
 

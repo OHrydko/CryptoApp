@@ -32,6 +32,7 @@ object Version {
     const val COMPOSE_COMPILER = "1.4.3"
     const val COIL = "2.2.2"
     const val FIREBASE = "23.0.3"
+    const val WORK_MANAGER = "2.8.1"
 }
 
 object Lib {
@@ -106,5 +107,6 @@ object Lib {
     const val MOCKITO_INLINE = "org.mockito:mockito-inline:2.13.0"
 
     const val FIREBASE = "com.google.firebase:firebase-messaging:${Version.FIREBASE}"
+    const val WORK_MANAGER = "androidx.work:work-runtime-ktx:${Version.WORK_MANAGER}"
 
 }
