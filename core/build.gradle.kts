@@ -150,6 +150,8 @@ dependencies {
 
     implementation(Lib.FIREBASE)
     implementation(Lib.WORK_MANAGER)
+    implementation(Lib.WORK_MANAGER_HILT)
+    kapt(Lib.WORK_MANAGER_HILT_COMPILER)
 
     implementation(project(Modules.DOMAIN_MODELS))
 

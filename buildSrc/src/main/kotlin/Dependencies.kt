@@ -108,5 +108,6 @@ object Lib {
 
     const val FIREBASE = "com.google.firebase:firebase-messaging:${Version.FIREBASE}"
     const val WORK_MANAGER = "androidx.work:work-runtime-ktx:${Version.WORK_MANAGER}"
-
+    const val WORK_MANAGER_HILT = "androidx.hilt:hilt-work:1.0.0"
+    const val WORK_MANAGER_HILT_COMPILER = "androidx.hilt:hilt-compiler:1.0.0"
 }

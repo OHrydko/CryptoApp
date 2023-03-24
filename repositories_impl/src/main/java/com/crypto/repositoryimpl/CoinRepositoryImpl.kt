@@ -1,5 +1,6 @@
 package com.crypto.repositoryimpl
 
+import android.util.Log
 import com.crypto.data_source.LocalCoinDataSource
 import com.crypto.data_source.RemoteCoinDataSource
 import com.crypto.domain_models.Coin
@@ -14,7 +15,17 @@ class CoinRepositoryImpl @Inject constructor(
 ) : CoinRepository {
 
     override suspend fun getCoins(): DataResult<List<Coin>> {
-        return remoteCoinDataSource.getCoins()
+        val response = remoteCoinDataSource.getCoins()
+
+        when (response) {
+            is DataResult.Success -> {
+                localCoinDataSource.insertCoins(response.data)
+            }
+            is DataResult.Failure -> {
+                Log.d(TAG, response.throwable.message.toString())
+            }
+        }
+        return response
     }
 
     override suspend fun getDetails(id: String): DataResult<CoinDetails> {
@@ -27,5 +38,9 @@ class CoinRepositoryImpl @Inject constructor(
 
     override suspend fun getCoinsFromDB(): DataResult<List<Coin>> {
         return localCoinDataSource.getCoinsFromDB()
+    }
+
+    companion object {
+        const val TAG = "CoinRepository"
     }
 }

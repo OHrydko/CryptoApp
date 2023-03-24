@@ -1,6 +1,5 @@
 package com.crypto.core
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -11,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @SuppressLint("LogNotTimber")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         intent.getStringExtra(MyFirebaseService.COIN_ID)
             ?.let { checkNotificationData(navHostFragment, it) }
+
     }
 
     private fun checkNotificationData(navHostFragment: NavHostFragment, data: String) {

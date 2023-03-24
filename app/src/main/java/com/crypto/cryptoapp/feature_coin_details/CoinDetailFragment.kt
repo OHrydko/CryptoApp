@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -20,8 +21,6 @@ import androidx.compose.ui.text.font.FontWeight.Companion.W400
 import androidx.compose.ui.text.font.FontWeight.Companion.W600
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.findNavController
@@ -63,32 +62,23 @@ private fun CoinDetailsScreen(
     val coinDetails = coinDetailViewModel.coinDetail.collectAsState()
     val isLoading = coinDetailViewModel.loading.collectAsState()
 
-    ConstraintLayout(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        val (toolbar, content) = createRefs()
 
         AppToolbar(
             title = coinDetails.value.name,
             onClick = onBackClick,
-            modifier = Modifier.constrainAs(toolbar) {
-                centerHorizontallyTo(parent)
-                top.linkTo(parent.top)
-            }
+            modifier = Modifier
         )
-        LazyColumn(
-            modifier = Modifier.constrainAs(content) {
-                top.linkTo(toolbar.bottom, margin = 10.dp)
-                bottom.linkTo(parent.bottom)
-                centerHorizontallyTo(parent)
-                height = Dimension.fillToConstraints
-            }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
-            item {
-                Content(coinDetails = coinDetails.value)
-            }
+            Content(coinDetails = coinDetails.value)
         }
 
         if (isLoading.value) {
