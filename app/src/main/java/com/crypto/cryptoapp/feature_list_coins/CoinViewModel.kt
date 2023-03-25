@@ -55,8 +55,6 @@ class CoinViewModel @Inject constructor(
     fun getListCoinFromDB() {
         viewModelScope.launch {
 
-            _loading.value = true
-
             val result = withContext(Dispatchers.IO) {
                 getCoinsFromDBUseCase()
             }
@@ -68,8 +66,6 @@ class CoinViewModel @Inject constructor(
                     Timber.d("Fail")
                 }
             }
-
-            _loading.value = false
         }
     }
 }

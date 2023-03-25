@@ -46,12 +46,7 @@ class CoinDetailViewModel @Inject constructor(
 
             when (result) {
                 is DataResult.Success -> {
-
-                    if (result.data.description.en.isEmpty()) {
-                        result.data.description.en = "${result.data.name} description"
-                    }
                     _coinDetail.value = result.data
-
                 }
                 is DataResult.Failure -> {
                     Timber.d("Fail")

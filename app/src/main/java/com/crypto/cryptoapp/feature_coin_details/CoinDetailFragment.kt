@@ -60,28 +60,33 @@ private fun CoinDetailsScreen(
 ) {
 
     val coinDetails = coinDetailViewModel.coinDetail.collectAsState()
-    val isLoading = coinDetailViewModel.loading.collectAsState()
+    val isLoading = coinDetailViewModel.loading.collectAsState().value
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
 
-        AppToolbar(
-            title = coinDetails.value.name,
-            onClick = onBackClick,
-            modifier = Modifier
-        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .background(Color.White)
         ) {
-            Content(coinDetails = coinDetails.value)
+
+            AppToolbar(
+                title = coinDetails.value.name,
+                onClick = onBackClick,
+                modifier = Modifier
+            )
+            if (coinDetails.value != CoinDetails.emptyState) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    Content(coinDetails = coinDetails.value)
+                }
+            }
         }
 
-        if (isLoading.value) {
+        if (isLoading) {
             ScreenLoader()
         }
     }
@@ -137,24 +142,27 @@ private fun Content(coinDetails: CoinDetails) {
             fontWeight = W600,
         )
 
-        Text(
-            text = stringResource(R.string.description),
-            modifier = Modifier.padding(start = 24.dp),
-            color = SharedColors.Grey400
-        )
+        if (coinDetails.description.en.isNotEmpty()) {
 
-        Text(
-            text = coinDetails.description.en,
-            modifier = Modifier
-                .padding(top = 5.dp, bottom = 10.dp)
-                .padding(horizontal = 24.dp)
-                .clickable { isExpanded = !isExpanded },
-            color = Color.Black,
-            fontSize = SharedFontSize.Small2,
-            fontWeight = W400,
-            maxLines = if (isExpanded) Int.MAX_VALUE else 8,
-            overflow = if (isExpanded) TextOverflow.Visible else TextOverflow.Ellipsis
-        )
+            Text(
+                text = stringResource(R.string.description),
+                modifier = Modifier.padding(start = 24.dp),
+                color = SharedColors.Grey400
+            )
+
+            Text(
+                text = coinDetails.description.en,
+                modifier = Modifier
+                    .padding(top = 5.dp, bottom = 10.dp)
+                    .padding(horizontal = 24.dp)
+                    .clickable { isExpanded = !isExpanded },
+                color = Color.Black,
+                fontSize = SharedFontSize.Small2,
+                fontWeight = W400,
+                maxLines = if (isExpanded) Int.MAX_VALUE else 8,
+                overflow = if (isExpanded) TextOverflow.Visible else TextOverflow.Ellipsis
+            )
+        }
 
     }
 }

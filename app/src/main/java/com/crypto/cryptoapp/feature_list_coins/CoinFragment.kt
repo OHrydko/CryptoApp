@@ -73,21 +73,28 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
     val listCoins = coinViewModel.listCoins.collectAsState().value
     val isLoading = coinViewModel.loading.collectAsState().value
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
 
-        ToolbarApp()
-        Title()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
 
-        LazyColumn(modifier = Modifier.padding(bottom = 20.dp)) {
-            items(listCoins, key = { it.id }) { coin ->
-                ItemCrypto(coin = coin) {
-                    onCoinClick.invoke(coin.id)
+            ToolbarApp()
+            Title()
+
+            LazyColumn(modifier = Modifier.padding(bottom = 20.dp)) {
+                items(listCoins, key = { it.id }) { coin ->
+                    ItemCrypto(coin = coin) {
+                        onCoinClick.invoke(coin.id)
+                    }
                 }
             }
+
         }
 
         if (isLoading) {
