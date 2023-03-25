@@ -41,7 +41,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CoinFragment : Fragment() {
 
-    private val viewModelCoinViewModel: CoinViewModel by viewModels()
+    private val coinViewModel: CoinViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +50,7 @@ class CoinFragment : Fragment() {
     ): View = ComposeView(requireContext()).apply {
         setContent {
             AppTheme {
-                CoinsScreen(viewModelCoinViewModel) {
+                CoinsScreen(coinViewModel) {
                     findNavController().navigate(
                         R.id.coinDetailFragment,
                         CoinFragmentArgs(it).toBundle()
@@ -62,7 +62,7 @@ class CoinFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModelCoinViewModel.getListCoinFromDB()
+        coinViewModel.getListCoinFromDB()
     }
 
 }
