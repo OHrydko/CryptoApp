@@ -166,6 +166,7 @@ dependencies {
     implementation(project(Modules.STORAGE))
 
     implementation(project(Modules.APP))
+    implementation(project(Modules.RESOURCES))
 
 
 }

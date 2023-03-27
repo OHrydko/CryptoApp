@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -35,9 +36,10 @@ import com.crypto.base.AppTheme
 import com.crypto.base.ui.ScreenLoader
 import com.crypto.cryptoapp.R
 import com.crypto.domain_models.Coin
-import com.crypto.resources.SharedColors
 import com.crypto.resources.SharedFontSize
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class CoinFragment : Fragment() {
@@ -63,7 +65,12 @@ class CoinFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         coinViewModel.getListCoinFromDB()
+
+        coinViewModel.error.onEach {
+            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
+        }.launchIn(lifecycleScope)
     }
 
 }

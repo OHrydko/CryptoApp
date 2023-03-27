@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,7 +23,8 @@ import androidx.compose.ui.text.font.FontWeight.Companion.W600
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -33,9 +35,13 @@ import com.crypto.cryptoapp.R
 import com.crypto.domain_models.CoinDetails
 import com.crypto.resources.SharedFontSize
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class CoinDetailFragment : Fragment() {
+
+    private val coinViewModel: CoinDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,18 +50,29 @@ class CoinDetailFragment : Fragment() {
     ): View = ComposeView(requireContext()).apply {
         setContent {
             AppTheme {
-                CoinDetailsScreen(onBackClick = {
-                    findNavController().popBackStack()
-                })
+                CoinDetailsScreen(
+                    onBackClick = {
+                        findNavController().popBackStack()
+                    },
+                    coinDetailViewModel = coinViewModel
+                )
             }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        coinViewModel.error.onEach {
+            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
+        }.launchIn(lifecycleScope)
     }
 }
 
 @Composable
 private fun CoinDetailsScreen(
     onBackClick: () -> Unit,
-    coinDetailViewModel: CoinDetailViewModel = viewModel(),
+    coinDetailViewModel: CoinDetailViewModel,
 ) {
 
     val coinDetails = coinDetailViewModel.coinDetail.collectAsState()

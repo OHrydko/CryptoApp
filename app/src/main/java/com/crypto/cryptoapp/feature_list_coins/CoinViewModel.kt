@@ -2,13 +2,17 @@ package com.crypto.cryptoapp.feature_list_coins
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.crypto.cryptoapp.R
 import com.crypto.domain_models.Coin
 import com.crypto.domain_models.DataResult
+import com.crypto.resources.ResProvider
 import com.crypto.usecases.GetCoinsFromDBUseCase
 import com.crypto.usecases.GetListCoinsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,10 +23,14 @@ import javax.inject.Inject
 class CoinViewModel @Inject constructor(
     private val useCase: GetListCoinsUseCase,
     private val getCoinsFromDBUseCase: GetCoinsFromDBUseCase,
+    private val resProvider: ResProvider
 ) : ViewModel() {
 
     private val _listCoins = MutableStateFlow<List<Coin>>(listOf())
     val listCoins = _listCoins.asStateFlow()
+
+    private val _error = MutableSharedFlow<String>()
+    val error = _error.asSharedFlow()
 
     private val _loading = MutableStateFlow(false)
     val loading = _loading.asStateFlow()
@@ -44,7 +52,10 @@ class CoinViewModel @Inject constructor(
                     _listCoins.value = result.data
                 }
                 is DataResult.Failure -> {
-                    Timber.d("Fail")
+                    _error.emit(
+                        result.throwable.message
+                            ?: resProvider.getStringRes(R.string.something_went_wrong)
+                    )
                 }
             }
 
@@ -63,7 +74,7 @@ class CoinViewModel @Inject constructor(
                     _listCoins.value = result.data.sortedBy { it.marketCapRank.toInt() }
                 }
                 is DataResult.Failure -> {
-                    Timber.d("Fail")
+                    Timber.d(result.throwable)
                 }
             }
         }
