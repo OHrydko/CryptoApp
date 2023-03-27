@@ -3,10 +3,7 @@ package com.crypto.base.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.IconButton
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.crypto.base.Constants.MIN_TOOLBAR_HEIGHT
 import com.crypto.base.R
-import com.crypto.resources.SharedColors
 import com.crypto.resources.SharedFontSize
 
 @Composable
@@ -32,7 +28,7 @@ fun ScreenLoader() {
     ) {
         CircularProgressIndicator(
             modifier = Modifier.align(Alignment.Center),
-            color = SharedColors.DarkBlue,
+            color = MaterialTheme.colors.onSecondary,
         )
     }
 }
@@ -40,8 +36,8 @@ fun ScreenLoader() {
 @Composable
 fun AppToolbar(
     title: String,
-    titleColor: Color = Color.Black,
-    iconColor: Color = Color.Black,
+    titleColor: Color = MaterialTheme.colors.secondaryVariant,
+    iconColor: Color = MaterialTheme.colors.secondaryVariant,
     onClick: () -> Unit,
     styleToolbarText: TextStyle = TextStyle(
         fontWeight = FontWeight.W700,

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -76,7 +77,7 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colors.background)
     ) {
 
         Column(
@@ -109,7 +110,7 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .background(Color.White)
+                .background(MaterialTheme.colors.background)
                 .clickable(onClick = onCoinClick),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -120,7 +121,7 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
                     .width(50.dp)
                     .padding(start = 10.dp),
                 fontWeight = FontWeight.W500,
-                color = SharedColors.Grey700,
+                color = MaterialTheme.colors.secondary,
                 textAlign = TextAlign.Center,
                 fontSize = SharedFontSize.Small,
             )
@@ -146,7 +147,7 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
                 Text(
                     text = coin.name,
                     fontWeight = FontWeight.W500,
-                    color = SharedColors.Grey700,
+                    color = MaterialTheme.colors.secondary,
                     fontSize = SharedFontSize.Medium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -155,7 +156,7 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
                 Text(
                     text = coin.symbol.uppercase(),
                     fontWeight = FontWeight.W500,
-                    color = SharedColors.Grey400,
+                    color = MaterialTheme.colors.primary,
                     fontSize = SharedFontSize.Small
                 )
             }
@@ -171,12 +172,12 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
                 modifier = Modifier
                     .padding(end = 10.dp),
                 fontWeight = FontWeight.W500,
-                color = SharedColors.Grey700,
+                color = MaterialTheme.colors.secondary,
                 fontSize = SharedFontSize.Medium
             )
         }
         Divider(
-            color = SharedColors.Grey200,
+            color = MaterialTheme.colors.primaryVariant,
             thickness = 1.dp,
             modifier = Modifier
                 .fillMaxWidth()
@@ -194,7 +195,7 @@ private fun ToolbarApp(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(R.string.top_100),
-            color = SharedColors.Grey900,
+            color = MaterialTheme.colors.onPrimary,
             fontWeight = FontWeight.W600,
             fontSize = SharedFontSize.Large
         )
@@ -208,7 +209,7 @@ fun Title() {
         Row(modifier = Modifier.fillMaxWidth()) {
 
             val textStyle = TextStyle(
-                color = SharedColors.Grey400,
+                color = MaterialTheme.colors.primary,
                 fontWeight = FontWeight.W300,
                 fontSize = SharedFontSize.Small,
             )
@@ -233,7 +234,7 @@ fun Title() {
             }
         }
         Divider(
-            color = SharedColors.Grey200,
+            color = MaterialTheme.colors.primaryVariant,
             thickness = 1.dp,
             modifier = Modifier
                 .fillMaxWidth()

@@ -30,6 +30,7 @@ object SharedColors {
     val Blue100 = Color(0xFFDCE9FE)
 
     val White = Color.White
+    val Black = Color.Black
     val DarkBlue = Color(0xFF022964)
     val Green = Color(0xFF5FD788)
     val Orange = Color(0xFFFF8C39)

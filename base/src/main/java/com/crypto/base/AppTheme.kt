@@ -1,5 +1,6 @@
 package com.crypto.base
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
@@ -8,15 +9,21 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.text.font.FontWeight.Companion.W900
 import androidx.compose.ui.unit.sp
-import com.crypto.resources.SharedColors
-import com.crypto.resources.SharedFont
-import com.crypto.resources.SharedFontSize
+import com.crypto.resources.*
 
 @Composable
 fun AppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    val myColors = if (darkTheme) {
+        darkColors
+    } else {
+        lightColors
+    }
+
     MaterialTheme(
+        colors = myColors,
         typography = Typography(
             defaultFontFamily = SharedFont.defaultFontFamily,
             h1 = TextStyle(

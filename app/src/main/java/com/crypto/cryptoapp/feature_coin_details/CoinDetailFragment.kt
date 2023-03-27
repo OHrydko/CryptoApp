@@ -9,10 +9,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
@@ -31,7 +31,6 @@ import com.crypto.base.ui.AppToolbar
 import com.crypto.base.ui.ScreenLoader
 import com.crypto.cryptoapp.R
 import com.crypto.domain_models.CoinDetails
-import com.crypto.resources.SharedColors
 import com.crypto.resources.SharedFontSize
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,7 +66,7 @@ private fun CoinDetailsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White)
+                .background(MaterialTheme.colors.background)
         ) {
 
             AppToolbar(
@@ -117,13 +116,13 @@ private fun Content(coinDetails: CoinDetails) {
         Text(
             text = stringResource(R.string.market_cap_rank),
             modifier = Modifier.padding(start = 24.dp),
-            color = SharedColors.Grey400
+            color = MaterialTheme.colors.primary
         )
 
         Text(
             text = coinDetails.marketData.marketCapRank,
             modifier = Modifier.padding(top = 5.dp, start = 24.dp, bottom = 10.dp),
-            color = Color.Black,
+            color = MaterialTheme.colors.secondaryVariant,
             fontSize = SharedFontSize.Small2,
             fontWeight = W600,
         )
@@ -131,13 +130,13 @@ private fun Content(coinDetails: CoinDetails) {
         Text(
             text = stringResource(R.string.current_price),
             modifier = Modifier.padding(start = 24.dp),
-            color = SharedColors.Grey400
+            color = MaterialTheme.colors.primary
         )
 
         Text(
             text = "${coinDetails.marketData.currentPrice.usd}$",
             modifier = Modifier.padding(top = 5.dp, start = 24.dp, bottom = 10.dp),
-            color = Color.Black,
+            color = MaterialTheme.colors.secondaryVariant,
             fontSize = SharedFontSize.Small2,
             fontWeight = W600,
         )
@@ -147,7 +146,7 @@ private fun Content(coinDetails: CoinDetails) {
             Text(
                 text = stringResource(R.string.description),
                 modifier = Modifier.padding(start = 24.dp),
-                color = SharedColors.Grey400
+                color = MaterialTheme.colors.primary
             )
 
             Text(
@@ -156,7 +155,7 @@ private fun Content(coinDetails: CoinDetails) {
                     .padding(top = 5.dp, bottom = 10.dp)
                     .padding(horizontal = 24.dp)
                     .clickable { isExpanded = !isExpanded },
-                color = Color.Black,
+                color = MaterialTheme.colors.secondaryVariant,
                 fontSize = SharedFontSize.Small2,
                 fontWeight = W400,
                 maxLines = if (isExpanded) Int.MAX_VALUE else 8,
