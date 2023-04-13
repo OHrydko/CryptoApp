@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CoinViewModel @Inject constructor(
-    private val useCase: GetListCoinsUseCase,
+    private val getListCoinsUseCase: GetListCoinsUseCase,
     private val getCoinsFromDBUseCase: GetCoinsFromDBUseCase,
     private val resProvider: ResProvider
 ) : ViewModel() {
@@ -45,11 +45,11 @@ class CoinViewModel @Inject constructor(
             _loading.value = true
 
             val result = withContext(Dispatchers.IO) {
-                useCase()
+                getListCoinsUseCase()
             }
             when (result) {
                 is DataResult.Success -> {
-                    _listCoins.value = result.data
+                    Timber.d(resProvider.getStringRes(R.string.success))
                 }
                 is DataResult.Failure -> {
                     _error.emit(
@@ -59,11 +59,12 @@ class CoinViewModel @Inject constructor(
                 }
             }
 
-            _loading.value = false
+            getListCoinFromDB()
+
         }
     }
 
-    fun getListCoinFromDB() {
+    private fun getListCoinFromDB() {
         viewModelScope.launch {
 
             val result = withContext(Dispatchers.IO) {
@@ -77,6 +78,8 @@ class CoinViewModel @Inject constructor(
                     Timber.d(result.throwable)
                 }
             }
+
+            _loading.value = false
         }
     }
 }

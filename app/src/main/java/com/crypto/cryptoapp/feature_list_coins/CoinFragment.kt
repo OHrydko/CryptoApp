@@ -66,8 +66,6 @@ class CoinFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        coinViewModel.getListCoinFromDB()
-
         coinViewModel.error.onEach {
             Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
         }.launchIn(lifecycleScope)

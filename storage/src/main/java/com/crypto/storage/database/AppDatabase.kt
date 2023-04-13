@@ -18,7 +18,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getCoinDao(): CoinDao
 
     companion object {
-        const val VERSION = 2
+        const val VERSION = 3
         const val NAME = "database"
     }
 }
