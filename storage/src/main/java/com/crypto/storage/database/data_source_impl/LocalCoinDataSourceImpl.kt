@@ -20,4 +20,8 @@ class LocalCoinDataSourceImpl @Inject constructor(private val coinDao: CoinDao) 
         return DataResult.Success(coinDao.getCoins().map { it.toDomain() })
     }
 
+    override suspend fun clearCoins() {
+        coinDao.clearCoins()
+    }
+
 }

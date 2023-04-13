@@ -15,4 +15,7 @@ interface CoinDao {
     @Query("SELECT * from coin_entity order by marketCapRank")
     fun getCoins(): List<CoinEntity>
 
+    @Query("DELETE from coin_entity")
+    fun clearCoins()
+
 }

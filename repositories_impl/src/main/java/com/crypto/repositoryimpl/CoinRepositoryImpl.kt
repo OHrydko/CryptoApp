@@ -19,6 +19,7 @@ class CoinRepositoryImpl @Inject constructor(
 
         when (response) {
             is DataResult.Success -> {
+                localCoinDataSource.clearCoins()
                 localCoinDataSource.insertCoins(response.data)
             }
             is DataResult.Failure -> {
