@@ -55,12 +55,14 @@ class CoinDetailViewModel @Inject constructor(
                 is DataResult.Success -> {
                     _coinDetail.value = result.data
                 }
+
                 is DataResult.Failure -> {
                     _error.emit(
                         result.throwable.message
                             ?: resProvider.getStringRes(R.string.something_went_wrong)
                     )
                 }
+
                 else -> {}
             }
 

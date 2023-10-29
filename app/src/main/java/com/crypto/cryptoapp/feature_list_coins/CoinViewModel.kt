@@ -10,10 +10,7 @@ import com.crypto.usecases.GetCoinsFromDBUseCase
 import com.crypto.usecases.GetListCoinsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -36,21 +33,23 @@ class CoinViewModel @Inject constructor(
     val loading = _loading.asStateFlow()
 
     init {
+        observeCoinsList()
         getListCoin()
     }
 
     private fun getListCoin() {
         viewModelScope.launch {
-
             _loading.value = true
 
             val result = withContext(Dispatchers.IO) {
                 getListCoinsUseCase()
             }
+
             when (result) {
                 is DataResult.Success -> {
-                    Timber.d(resProvider.getStringRes(R.string.success))
+                    Timber.tag(TAG).d(resProvider.getStringRes(R.string.success))
                 }
+
                 is DataResult.Failure -> {
                     _error.emit(
                         result.throwable.message
@@ -59,27 +58,19 @@ class CoinViewModel @Inject constructor(
                 }
             }
 
-            getListCoinFromDB()
-
+            _loading.value = false
         }
     }
 
-    private fun getListCoinFromDB() {
-        viewModelScope.launch {
+    private fun observeCoinsList() {
+        getCoinsFromDBUseCase()
+            .flowOn(Dispatchers.IO)
+            .onEach { result ->
+                _listCoins.update { result.sortedBy { it.marketCapRank.toInt() } }
+            }.launchIn(viewModelScope)
+    }
 
-            val result = withContext(Dispatchers.IO) {
-                getCoinsFromDBUseCase()
-            }
-            when (result) {
-                is DataResult.Success -> {
-                    _listCoins.value = result.data.sortedBy { it.marketCapRank.toInt() }
-                }
-                is DataResult.Failure -> {
-                    Timber.d(result.throwable)
-                }
-            }
-
-            _loading.value = false
-        }
+    companion object {
+        private const val TAG = "CoinViewModelTag"
     }
 }

@@ -7,6 +7,7 @@ import com.crypto.domain_models.Coin
 import com.crypto.domain_models.CoinDetails
 import com.crypto.domain_models.DataResult
 import com.crypto.repositories.CoinRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CoinRepositoryImpl @Inject constructor(
@@ -37,7 +38,7 @@ class CoinRepositoryImpl @Inject constructor(
         return localCoinDataSource.insertCoins(coins)
     }
 
-    override suspend fun getCoinsFromDB(): DataResult<List<Coin>> {
+    override fun getCoinsFromDB(): Flow<List<Coin>> {
         return localCoinDataSource.getCoinsFromDB()
     }
 

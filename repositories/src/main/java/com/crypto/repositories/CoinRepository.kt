@@ -3,6 +3,7 @@ package com.crypto.repositories
 import com.crypto.domain_models.Coin
 import com.crypto.domain_models.CoinDetails
 import com.crypto.domain_models.DataResult
+import kotlinx.coroutines.flow.Flow
 
 interface CoinRepository {
 
@@ -12,6 +13,6 @@ interface CoinRepository {
 
     suspend fun insertCoins(coins: List<Coin>): DataResult<Unit>
 
-    suspend fun getCoinsFromDB(): DataResult<List<Coin>>
+    fun getCoinsFromDB(): Flow<List<Coin>>
 
 }
