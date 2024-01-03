@@ -1,7 +1,9 @@
 package com.crypto.network.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class CoinDetailJson(
     @SerializedName("id")
     val id: String,
@@ -17,17 +19,20 @@ data class CoinDetailJson(
     val marketData: MarketDataJson
 )
 
+@Keep
 data class DescriptionJson(
     @SerializedName("en")
     val en: String
 )
 
 
+@Keep
 data class MarketCapJson(
     @SerializedName("usd")
     val usd: String
 )
 
+@Keep
 data class MarketDataJson(
     @SerializedName("current_price")
     val currentPrice: MarketCapJson,
@@ -35,6 +40,7 @@ data class MarketDataJson(
     val marketCapRank: String
 )
 
+@Keep
 data class CoinImageJson(
     @SerializedName("thumb")
     val thumb: String,

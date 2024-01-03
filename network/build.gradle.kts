@@ -24,7 +24,7 @@ android {
             buildConfigField("String", "AUTH_USERNAME", "\"serviceuser\"")
             buildConfigField("String", "AUTH_PASSWORD", "\"Diaspora1!\"")
 
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
