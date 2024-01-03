@@ -8,6 +8,7 @@ import com.crypto.storage.database.mapper.toDomain
 import com.crypto.storage.database.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class LocalCoinDataSourceImpl @Inject constructor(private val coinDao: CoinDao) :
@@ -19,7 +20,9 @@ class LocalCoinDataSourceImpl @Inject constructor(private val coinDao: CoinDao) 
     }
 
     override fun getCoinsFromDB(): Flow<List<Coin>> {
-        return flow { emit(coinDao.getCoins().map { it.toDomain() }) }
+        return flow {
+            coinDao.getCoins().collect { coins -> emit(coins.map { coin -> coin.toDomain() }) }
+        }
     }
 
     override suspend fun clearCoins() {

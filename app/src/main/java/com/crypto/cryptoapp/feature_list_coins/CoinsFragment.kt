@@ -25,7 +25,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -36,6 +35,7 @@ import com.crypto.base.AppTheme
 import com.crypto.base.ui.ScreenLoader
 import com.crypto.cryptoapp.R
 import com.crypto.domain_models.Coin
+import com.crypto.resources.AppPaddings
 import com.crypto.resources.SharedFontSize
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -44,7 +44,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class CoinFragment : Fragment() {
 
-    private val coinViewModel: CoinViewModel by viewModels()
+    private val coinsViewModel: CoinsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +53,7 @@ class CoinFragment : Fragment() {
     ): View = ComposeView(requireContext()).apply {
         setContent {
             AppTheme {
-                CoinsScreen(coinViewModel) {
+                CoinsScreen(coinsViewModel) {
                     findNavController().navigate(
                         R.id.coinDetailFragment,
                         CoinFragmentArgs(it).toBundle()
@@ -66,7 +66,7 @@ class CoinFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        coinViewModel.error.onEach {
+        coinsViewModel.error.onEach {
             Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
         }.launchIn(lifecycleScope)
     }
@@ -74,10 +74,10 @@ class CoinFragment : Fragment() {
 }
 
 @Composable
-private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> Unit) {
+private fun CoinsScreen(coinsViewModel: CoinsViewModel, onCoinClick: (String) -> Unit) {
 
-    val listCoins = coinViewModel.listCoins.collectAsState().value
-    val isLoading = coinViewModel.loading.collectAsState().value
+    val listCoins = coinsViewModel.listCoins.collectAsState().value
+    val isLoading = coinsViewModel.loading.collectAsState().value
 
     Box(
         modifier = Modifier
@@ -93,7 +93,7 @@ private fun CoinsScreen(coinViewModel: CoinViewModel, onCoinClick: (String) -> U
             ToolbarApp()
             Title()
 
-            LazyColumn(modifier = Modifier.padding(bottom = 20.dp)) {
+            LazyColumn(modifier = Modifier.padding(bottom = AppPaddings.Medium2)) {
                 items(listCoins, key = { it.id }) { coin ->
                     ItemCrypto(coin = coin) {
                         onCoinClick.invoke(coin.id)
@@ -123,8 +123,8 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
             Text(
                 text = "${coin.marketCapRank}.",
                 modifier = Modifier
-                    .width(50.dp)
-                    .padding(start = 10.dp),
+                    .width(AppPaddings.Huge2)
+                    .padding(start = AppPaddings.Piddling),
                 fontWeight = FontWeight.W500,
                 color = MaterialTheme.colors.secondary,
                 textAlign = TextAlign.Center,
@@ -139,13 +139,13 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
                 contentDescription = "icon",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .padding(vertical = 10.dp)
-                    .size(40.dp)
+                    .padding(vertical = AppPaddings.Piddling)
+                    .size(AppPaddings.Huge)
             )
 
             Column(
                 modifier = Modifier
-                    .padding(start = 10.dp)
+                    .padding(start = AppPaddings.Piddling)
                     .weight(1f)
             ) {
 
@@ -166,16 +166,10 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
                 )
             }
 
-            val price = if (coin.currentPrice > 1) {
-                "$${coin.currentPrice}"
-            } else {
-                "$${String.format("%.3f", coin.currentPrice)}"
-            }
-
             Text(
-                text = price,
+                text = coin.getCurrentPriceText(),
                 modifier = Modifier
-                    .padding(end = 10.dp),
+                    .padding(end = AppPaddings.Piddling),
                 fontWeight = FontWeight.W500,
                 color = MaterialTheme.colors.secondary,
                 fontSize = SharedFontSize.Medium
@@ -183,7 +177,7 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
         }
         Divider(
             color = MaterialTheme.colors.primaryVariant,
-            thickness = 1.dp,
+            thickness = AppPaddings.One,
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -194,8 +188,8 @@ private fun ItemCrypto(modifier: Modifier = Modifier, coin: Coin, onCoinClick: (
 private fun ToolbarApp(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
-            .padding(start = 10.dp)
-            .padding(vertical = 20.dp)
+            .padding(start = AppPaddings.Piddling)
+            .padding(vertical = AppPaddings.Medium2)
             .fillMaxWidth()
     ) {
         Text(
@@ -221,26 +215,27 @@ fun Title() {
             Text(
                 text = stringResource(R.string.number),
                 style = textStyle,
-                modifier = Modifier.padding(start = 20.dp)
+                modifier = Modifier.padding(start = AppPaddings.Medium2)
             )
 
             Text(
                 text = stringResource(R.string.name_symbol),
                 style = textStyle,
-                modifier = Modifier.padding(start = 20.dp)
+                modifier = Modifier.padding(start = AppPaddings.Medium2)
             )
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 Text(
                     text = stringResource(R.string.price),
                     style = textStyle,
-                    modifier = Modifier.padding(end = 10.dp)
+                    modifier = Modifier.padding(end = AppPaddings.Piddling)
                 )
             }
         }
+
         Divider(
             color = MaterialTheme.colors.primaryVariant,
-            thickness = 1.dp,
+            thickness = AppPaddings.One,
             modifier = Modifier
                 .fillMaxWidth()
         )

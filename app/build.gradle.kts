@@ -85,6 +85,7 @@ dependencies {
     implementation(Lib.COMPOSE_UI_TOOLING)
     implementation(Lib.COMPOSE_LIFECYCLE_VIEWMODEL)
     implementation(Lib.CONSTRAINTLAYOUT_COMPOSE)
+    implementation(Lib.COMPOSE_RUNTIME)
 
     implementation(Lib.NAVIGATION_FRAGMENT_KTX)
     implementation(Lib.NAVIGATION_UI_KTX)

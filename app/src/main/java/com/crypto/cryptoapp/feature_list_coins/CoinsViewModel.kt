@@ -17,7 +17,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class CoinViewModel @Inject constructor(
+class CoinsViewModel @Inject constructor(
     private val getListCoinsUseCase: GetListCoinsUseCase,
     private val getCoinsFromDBUseCase: GetCoinsFromDBUseCase,
     private val resProvider: ResProvider

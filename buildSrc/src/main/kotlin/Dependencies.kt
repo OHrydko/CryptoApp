@@ -1,17 +1,15 @@
 object Version {
     const val MIN_SDK = 23
-    const val TARGET_SDK = 33
-    const val COMPILE_SDK = 33
+    const val TARGET_SDK = 34
+    const val COMPILE_SDK = 34
 
-    const val BUILD_TOOLS = "30.0.3"
-
-    const val KOTLIN = "1.8.10"
+    const val KOTLIN = "1.9.21"
 
     const val COROUTINES = "1.5.0"
     const val ANDROIDX = "1.3.0"
     const val BIOMETRIC = "1.1.0"
     const val ANDROIDX_ANNOTATION = "1.2.0"
-    const val HILT = "2.38.1"
+    const val HILT = "2.48"
     const val LIFECYCLE = "2.3.1"
     const val OKHTTP = "4.9.0"
     const val RETROFIT2 = "2.9.0"
@@ -23,13 +21,14 @@ object Version {
     const val MATERIAL = "1.4.0"
     const val TIMBER = "4.7.1"
     const val NAVIGATION = "2.5.1"
-    const val ROOM = "2.4.3"
+    const val ROOM = "2.6.1"
 
     const val COMPOSE = "1.3.3"
     const val COMPOSE_MATERIAL = "1.3.1"
     const val COMPOSE_ANIMATION = "1.3.3"
     const val COMPOSE_UI_TOOLING = "1.3.3"
-    const val COMPOSE_COMPILER = "1.4.3"
+    const val COMPOSE_COMPILER = "1.5.7"
+    const val COMPOSE_RUNTIME = "1.5.4"
     const val COIL = "2.2.2"
     const val FIREBASE = "23.0.3"
     const val WORK_MANAGER = "2.8.1"
@@ -94,6 +93,7 @@ object Lib {
     const val COIL =
         "io.coil-kt:coil-compose:${Version.COIL}"
 
+    const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime:${Version.COMPOSE_RUNTIME}"
 
     // UI Tests
     const val COMPOSE_UI_TEST_JUNIT4 = "androidx.compose.ui:ui-test-junit4:${Version.COMPOSE}"

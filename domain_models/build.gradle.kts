@@ -40,5 +40,5 @@ android {
 dependencies {
     implementation(Lib.KOTLIN_STDLIB)
     implementation(Lib.THREETENABP)
-
+    implementation(Lib.COMPOSE_RUNTIME)
 }

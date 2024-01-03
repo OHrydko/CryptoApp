@@ -21,7 +21,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.W400
 import androidx.compose.ui.text.font.FontWeight.Companion.W600
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -32,7 +31,10 @@ import com.crypto.base.AppTheme
 import com.crypto.base.ui.AppToolbar
 import com.crypto.base.ui.ScreenLoader
 import com.crypto.cryptoapp.R
+import com.crypto.cryptoapp.feature_coin_details.CoinDetailFragment.Companion.DESCRIPTION_LINE_SIZE
 import com.crypto.domain_models.CoinDetails
+import com.crypto.resources.AppPaddings
+import com.crypto.resources.CoinDetailsPaddings.ImageSize
 import com.crypto.resources.SharedFontSize
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -66,6 +68,10 @@ class CoinDetailFragment : Fragment() {
         coinViewModel.error.onEach {
             Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
         }.launchIn(lifecycleScope)
+    }
+
+    companion object {
+        const val DESCRIPTION_LINE_SIZE = 8
     }
 }
 
@@ -126,19 +132,23 @@ private fun Content(coinDetails: CoinDetails) {
                 contentDescription = "icon",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(120.dp)
+                    .size(ImageSize)
             )
         }
 
         Text(
             text = stringResource(R.string.market_cap_rank),
-            modifier = Modifier.padding(start = 24.dp),
+            modifier = Modifier.padding(start = AppPaddings.Large2),
             color = MaterialTheme.colors.primary
         )
 
         Text(
             text = coinDetails.marketData.marketCapRank,
-            modifier = Modifier.padding(top = 5.dp, start = 24.dp, bottom = 10.dp),
+            modifier = Modifier.padding(
+                top = AppPaddings.Five,
+                start = AppPaddings.Large2,
+                bottom = AppPaddings.Piddling
+            ),
             color = MaterialTheme.colors.secondaryVariant,
             fontSize = SharedFontSize.Small2,
             fontWeight = W600,
@@ -146,13 +156,17 @@ private fun Content(coinDetails: CoinDetails) {
 
         Text(
             text = stringResource(R.string.current_price),
-            modifier = Modifier.padding(start = 24.dp),
+            modifier = Modifier.padding(start = AppPaddings.Large2),
             color = MaterialTheme.colors.primary
         )
 
         Text(
             text = "${coinDetails.marketData.currentPrice.usd}$",
-            modifier = Modifier.padding(top = 5.dp, start = 24.dp, bottom = 10.dp),
+            modifier = Modifier.padding(
+                top = AppPaddings.Five,
+                start = AppPaddings.Large2,
+                bottom = AppPaddings.Piddling
+            ),
             color = MaterialTheme.colors.secondaryVariant,
             fontSize = SharedFontSize.Small2,
             fontWeight = W600,
@@ -162,20 +176,20 @@ private fun Content(coinDetails: CoinDetails) {
 
             Text(
                 text = stringResource(R.string.description),
-                modifier = Modifier.padding(start = 24.dp),
+                modifier = Modifier.padding(start = AppPaddings.Large2),
                 color = MaterialTheme.colors.primary
             )
 
             Text(
                 text = coinDetails.description.en,
                 modifier = Modifier
-                    .padding(top = 5.dp, bottom = 10.dp)
-                    .padding(horizontal = 24.dp)
+                    .padding(top = AppPaddings.Five, bottom = AppPaddings.Piddling)
+                    .padding(horizontal = AppPaddings.Large2)
                     .clickable { isExpanded = !isExpanded },
                 color = MaterialTheme.colors.secondaryVariant,
                 fontSize = SharedFontSize.Small2,
                 fontWeight = W400,
-                maxLines = if (isExpanded) Int.MAX_VALUE else 8,
+                maxLines = if (isExpanded) Int.MAX_VALUE else DESCRIPTION_LINE_SIZE,
                 overflow = if (isExpanded) TextOverflow.Visible else TextOverflow.Ellipsis
             )
         }
