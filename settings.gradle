@@ -1,6 +1,6 @@
 // settings.gradle.kts build before buildSrc than why in this file Modules object not used.
 include(
-        ":core",
+        ':app',
         ":features",
         ":network",
         ":usecases_impl",

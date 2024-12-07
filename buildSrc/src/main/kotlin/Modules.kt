@@ -2,8 +2,6 @@ object Modules {
 
     const val BASE = ":base"
 
-    const val CORE = ":core"
-
     const val FEATURES = ":features"
 
     const val RESOURCES = ":resources"
