@@ -45,6 +45,7 @@ android {
         val options = this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
         options.jvmTarget = "1.8"
     }
+    namespace = "com.crypto.base"
 }
 
 dependencies {

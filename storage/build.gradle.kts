@@ -1,10 +1,7 @@
-import com.google.protobuf.gradle.*
-
 plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KAPT)
-    id("com.google.protobuf").version("0.8.12")
 }
 
 android {
@@ -39,6 +36,7 @@ android {
         val options = this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
         options.jvmTarget = "1.8"
     }
+    namespace = "com.crypto.storage"
 }
 
 dependencies {
@@ -56,23 +54,7 @@ dependencies {
     kapt(Lib.ROOM_COMPILER)
 
     implementation(Lib.DATASTORE)
-    implementation(Lib.PROTOBUF_JAVALITE)
 
     implementation(project(Modules.DATASOURCES))
     implementation(project(Modules.DOMAIN_MODELS))
-}
-
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.10.0"
-    }
-    generateProtoTasks {
-        all().forEach { task ->
-            task.builtins {
-                create("java") {
-                    option("lite")
-                }
-            }
-        }
-    }
 }

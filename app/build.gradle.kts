@@ -8,6 +8,8 @@ plugins {
 }
 
 android {
+    namespace = "com.crypto.cryptoapp"
+
     compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
@@ -19,10 +21,9 @@ android {
     }
 
     buildTypes {
-        getByName(BuildTypes.DEBUG) {
+        named(BuildTypes.DEBUG) {}
 
-        }
-        getByName(BuildTypes.RELEASE) {
+        named(BuildTypes.RELEASE) {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

@@ -63,31 +63,31 @@ android {
             )
         }
     }
-
-    applicationVariants.forEach { variant ->
-        variant.outputs.forEach { output ->
-            output as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-//            if (output as com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
-            val name =
-                "crypto(${AppVersion.NAME}:${AppVersion.NUMBER})-${variant.buildType.name}.apk"
-            output.outputFileName = name
+//
+//    applicationVariants.forEach { variant ->
+//        variant.outputs.forEach { output ->
+//            output as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+////            if (output as com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
+//            val name =
+//                "crypto(${AppVersion.NAME}:${AppVersion.NUMBER})-${variant.buildType.name}.apk"
+//            output.outputFileName = name
+////            }
+//        }
+//    }
+//
+//    applicationVariants.all(object : Action<com.android.build.gradle.api.ApplicationVariant> {
+//        override fun execute(variant: com.android.build.gradle.api.ApplicationVariant) {
+//            println("variant: ${variant}")
+//            variant.outputs.forEach { output ->
+//                output as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+////            if (output as com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
+//                val name =
+//                    "crypto(${AppVersion.NAME}-${AppVersion.NUMBER})-${variant.buildType.name}.apk"
+//                output.outputFileName = name
+////            }
 //            }
-        }
-    }
-
-    applicationVariants.all(object : Action<com.android.build.gradle.api.ApplicationVariant> {
-        override fun execute(variant: com.android.build.gradle.api.ApplicationVariant) {
-            println("variant: ${variant}")
-            variant.outputs.forEach { output ->
-                output as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-//            if (output as com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
-                val name =
-                    "crypto(${AppVersion.NAME}-${AppVersion.NUMBER})-${variant.buildType.name}.apk"
-                output.outputFileName = name
-//            }
-            }
-        }
-    })
+//        }
+//    })
 
     buildFeatures {
         viewBinding = true
@@ -103,6 +103,7 @@ android {
         val options = this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
         options.jvmTarget = "1.8"
     }
+    namespace = "com.crypto.core"
 
     kapt {
         javacOptions {
