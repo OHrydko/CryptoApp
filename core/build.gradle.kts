@@ -9,6 +9,7 @@ plugins {
 
 android {
     compileSdk = Version.COMPILE_SDK
+    namespace = "com.crypto.core"
 
     signingConfigs {
         create("release") {
@@ -42,12 +43,8 @@ android {
                 "API_ENDPOINT",
                 "\"https://api.coingecko.com/api/\""
             )
-
-
         }
         getByName(BuildTypes.RELEASE) {
-
-//            signingConfig = signingConfigs.getByName(BuildTypes.RELEASE)
 
             buildConfigField(
                 "String",
@@ -92,18 +89,15 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+
+     compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    // To avoid the compile error: "Cannot inline bytecode built with JVM target 1.8
-    // into bytecode that is being built with JVM target 1.6"
     kotlinOptions {
-        val options = this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
-        options.jvmTarget = "1.8"
+        jvmTarget = "17"
     }
-    namespace = "com.crypto.core"
 
     kapt {
         javacOptions {
@@ -167,7 +161,7 @@ dependencies {
     implementation(project(Modules.DATASOURCES))
     implementation(project(Modules.STORAGE))
 
-    implementation(project(Modules.APP))
+    implementation(project(Modules.FEATURES))
     implementation(project(Modules.RESOURCES))
 
 

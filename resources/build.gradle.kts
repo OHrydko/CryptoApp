@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdk = Version.COMPILE_SDK
+    namespace = "com.crypto.resources"
 
     defaultConfig {
         minSdk = Version.MIN_SDK
@@ -32,18 +33,14 @@ android {
         kotlinCompilerExtensionVersion = Version.COMPOSE_COMPILER
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+     compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    // To avoid the compile error: "Cannot inline bytecode built with JVM target 1.8
-    // into bytecode that is being built with JVM target 1.6"
     kotlinOptions {
-        val options = this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
-        options.jvmTarget = "1.8"
+        jvmTarget = "17"
     }
-    namespace = "com.crypto.resources"
 }
 
 dependencies {

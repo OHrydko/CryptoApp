@@ -4,7 +4,7 @@ object Modules {
 
     const val CORE = ":core"
 
-    const val APP = ":app"
+    const val FEATURES = ":features"
 
     const val RESOURCES = ":resources"
     
