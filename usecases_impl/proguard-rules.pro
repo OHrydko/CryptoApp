@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+# Keep the specific implementation class
+-keep class com.crypto.usecases_impl.** { *; }
+-dontwarn com.crypto.repositories.CoinRepository
+-dontwarn com.crypto.usecases.GetCoinDetailsUseCase
+-dontwarn com.crypto.usecases.GetCoinsFromDBUseCase
+-dontwarn com.crypto.usecases.GetListCoinsUseCase
+-dontwarn com.crypto.usecases.InsertCoinsUseCase

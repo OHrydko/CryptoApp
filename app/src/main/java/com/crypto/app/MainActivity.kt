@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.crypto.app.firebase.MyFirebaseService
-import com.crypto.features.feature_list_coins.CoinFragmentArgs
+import com.crypto.features.feature_list_coins.CoinsFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         if (data.isNotEmpty()) {
             navHostFragment.navController.navigate(
                 R.id.coinDetailFragment,
-                CoinFragmentArgs(data).toBundle()
+                CoinsFragmentArgs(data).toBundle()
             )
         }
     }

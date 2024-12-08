@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class com.crypto.repositoryimpl.** { *; }
+-dontwarn com.crypto.data_source.LocalCoinDataSource
+-dontwarn com.crypto.data_source.RemoteCoinDataSource
+-dontwarn com.crypto.domain_models.DataResult$Failure
+-dontwarn com.crypto.domain_models.DataResult$Success
+-dontwarn com.crypto.domain_models.DataResult
+-dontwarn com.crypto.repositories.CoinRepository

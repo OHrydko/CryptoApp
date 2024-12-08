@@ -18,4 +18,26 @@
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
-#-renamesourcefileattribute SourceFile
+
+# Keep all fragments in the package (optional, broader scope)
+-keep class com.crypto.features.** { *; }
+-dontwarn com.crypto.base.AppThemeKt
+-dontwarn com.crypto.base.ui.ComposesKt
+-dontwarn com.crypto.domain_models.Coin
+-dontwarn com.crypto.domain_models.DataResult$Failure
+-dontwarn com.crypto.domain_models.DataResult$Success
+-dontwarn com.crypto.domain_models.DataResult
+-dontwarn com.crypto.resources.AppPaddings
+-dontwarn com.crypto.resources.ResProvider
+-dontwarn com.crypto.resources.SharedFontSize
+-dontwarn com.crypto.usecases.GetCoinsFromDBUseCase
+-dontwarn com.crypto.usecases.GetListCoinsUseCase
+-dontwarn java.lang.invoke.StringConcatFactory
+-dontwarn com.crypto.domain_models.CoinDetails$Companion
+-dontwarn com.crypto.domain_models.CoinDetails
+-dontwarn com.crypto.domain_models.CoinImage
+-dontwarn com.crypto.domain_models.Description
+-dontwarn com.crypto.domain_models.MarketCap
+-dontwarn com.crypto.domain_models.MarketData
+-dontwarn com.crypto.resources.CoinDetailsPaddings
+-dontwarn com.crypto.usecases.GetCoinDetailsUseCase

@@ -42,7 +42,7 @@ import kotlinx.coroutines.flow.onEach
 import com.crypto.features.R
 
 @AndroidEntryPoint
-class CoinFragment : Fragment() {
+class CoinsFragment : Fragment() {
 
     private val coinsViewModel: CoinsViewModel by viewModels()
 
@@ -56,7 +56,7 @@ class CoinFragment : Fragment() {
                 CoinsScreen(coinsViewModel) {
                     findNavController().navigate(
                         R.id.coinDetailFragment,
-                        CoinFragmentArgs(it).toBundle()
+                        CoinsFragmentArgs(it).toBundle()
                     )
                 }
             }
