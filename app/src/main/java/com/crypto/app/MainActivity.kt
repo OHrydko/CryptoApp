@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.crypto.app.firebase.MyFirebaseService
-import com.crypto.cryptoapp.feature_list_coins.CoinFragmentArgs
+import com.crypto.features.feature_list_coins.CoinFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.crypto.cryptoapp.feature_coin_details
+package com.crypto.features.feature_coin_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,8 +30,8 @@ import coil.request.ImageRequest
 import com.crypto.base.AppTheme
 import com.crypto.base.ui.AppToolbar
 import com.crypto.base.ui.ScreenLoader
-import com.crypto.cryptoapp.R
-import com.crypto.cryptoapp.feature_coin_details.CoinDetailFragment.Companion.DESCRIPTION_LINE_SIZE
+import com.crypto.features.R
+import com.crypto.features.feature_coin_details.CoinDetailFragment.Companion.DESCRIPTION_LINE_SIZE
 import com.crypto.domain_models.CoinDetails
 import com.crypto.resources.AppPaddings
 import com.crypto.resources.CoinDetailsPaddings.ImageSize

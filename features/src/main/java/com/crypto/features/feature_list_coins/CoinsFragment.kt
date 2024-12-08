@@ -1,4 +1,4 @@
-package com.crypto.cryptoapp.feature_list_coins
+package com.crypto.features.feature_list_coins
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -33,13 +33,13 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.crypto.base.AppTheme
 import com.crypto.base.ui.ScreenLoader
-import com.crypto.cryptoapp.R
 import com.crypto.domain_models.Coin
 import com.crypto.resources.AppPaddings
 import com.crypto.resources.SharedFontSize
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import com.crypto.features.R
 
 @AndroidEntryPoint
 class CoinFragment : Fragment() {

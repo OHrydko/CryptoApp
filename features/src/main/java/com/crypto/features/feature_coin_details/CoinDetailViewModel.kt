@@ -1,9 +1,9 @@
-package com.crypto.cryptoapp.feature_coin_details
+package com.crypto.features.feature_coin_details
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.crypto.cryptoapp.R
+import com.crypto.features.R
 import com.crypto.domain_models.CoinDetails
 import com.crypto.domain_models.DataResult
 import com.crypto.resources.ResProvider

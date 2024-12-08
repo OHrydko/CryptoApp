@@ -9,7 +9,7 @@ plugins {
 
 android {
     compileSdk = Version.COMPILE_SDK
-    namespace = "com.crypto.cryptoapp"
+    namespace = "com.crypto.features"
 
     defaultConfig {
         minSdk = Version.MIN_SDK

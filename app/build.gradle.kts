@@ -15,7 +15,7 @@ android {
         create("release") {
             keyAlias = "release"
             keyPassword = "qwerty123"
-            storeFile = file("/Users/ohrydko/AndroidStudioProjects/CryptoApp2/Untitled")
+            storeFile = file("/Users/ohrydko/StudioProjects/CryptoApp/Untitled")
             storePassword = "qwerty123"
         }
     }

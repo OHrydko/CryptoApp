@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/coinFragment"
-        android:name="com.crypto.cryptoapp.feature_list_coins.CoinFragment"
+        android:name="com.crypto.features.feature_list_coins.CoinFragment"
         android:label="CoinFragment" >
         <action
             android:id="@+id/action_coinFragment_to_coinDetailFragment"
@@ -20,6 +20,6 @@
 
     <fragment
         android:id="@+id/coinDetailFragment"
-        android:name="com.crypto.cryptoapp.feature_coin_details.CoinDetailFragment"
+        android:name="com.crypto.features.feature_coin_details.CoinDetailFragment"
         android:label="CoinDetailFragment" />
 </navigation>
